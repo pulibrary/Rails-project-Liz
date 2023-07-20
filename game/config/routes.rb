@@ -4,11 +4,8 @@ Rails.application.routes.draw do
   get "/create_account", to: "users#create_account"
   get "/scoreboard", to: "users#scoreboard", as: "scoreboard"
 
-  get "/edit_profile", to: "users#edit_profile"
-  get "/profile", to: "users#access_profile"
-
-  
-  # get "/access_profile", to: "users#access_profile"
+  get "/authenticate", to: "users#authenticate"
+  post "/access_profile", to: "users#access_profile"
 
   # resource :user, only: [:edit, :update]
   

@@ -3,7 +3,7 @@
 <h3> Username: <%= @user.username%> </h3>
 <% @user.scores.each do |score| %>
     <p> Score: <%= score.score %> </p>
-    <p> Date-Time: <%= score.datetime %> </p>
+    <p> Date-Time: <%= score.created_at %> </p>
     <br>
 <% end %>
 
@@ -11,7 +11,7 @@
 <ul>
     <li> <%= link_to "Edit", edit_user_path(@user) %> </li>
     <li> <%= link_to "Destroy", user_path(@user), data: {
-        turbo_method: :delete
+        turbo_method: :delete,
         turbo_confirm: "Are you sure?"
     } %> </li>
 </ul>

@@ -41,14 +41,14 @@ class UsersController < ApplicationController
     render "users/profile"
   end
 
-  def edit_profile
-    respond_to do |format|
-      format.js { render 'edit'}
-    end
+  def authenticate
+    # respond_to do |format|
+    #   format.js { render 'dialog_form'}
+    # end
+    render "dialog_form c"
   end 
 
   def auth
-
      # Get the username and password from the request parameters
      username = params[:username]
      password = params[:password]
@@ -71,13 +71,18 @@ class UsersController < ApplicationController
 
   def access_profile
     @user = User.find_by(username: params[:username])
-    @scores = Score.joins(@user) # due to association, "joins" matches id automatically.
+
+    if @user
+      @scores = Score.joins(@user) # due to association, "joins" matches id automatically.
                     .select("score.*")
                     .where("scores.score = (SELECT MAX(score) FROM scores where user_id = users.id)")
                     .order("score: :desc")
                     .limit(10)
 
     render "users/profile"
+    else
+      render json: { status: "error", message: "Invalid username or password" }, status: :unprocessable_entity
+    end
   end
 
   def update

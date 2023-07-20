@@ -7,7 +7,10 @@
 <h1> Welcome to Liz's Connect4 Game! </h1>
 
 <%# edit_profile_path automatically generates '/edit_profile' to match route %>
-<%= link_to "Profile", edit_profile_path %>
+<%= link_to "Profile", authenticate_path %>
+<br>
+<%= render "dialog_form c" %>
+
 
 
 <h2> Instructions: <h2>
