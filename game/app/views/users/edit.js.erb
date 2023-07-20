@@ -1,0 +1,38 @@
+// app/views/users/edit.js.erb
+<%# j is to be able to include javascript %>
+$('#form-dialog').html("<%= j render 'form_dialog' %>");
+$('#form-dialog').dialog({
+  title: 'Edit User',
+  modal: true,
+  width: 'auto',
+  buttons: {
+    "Save": function() {
+        var username = $('#username-field').val();
+        var password = $('#password-field').val();
+        
+        <%# Submit the form via AJAX %>
+        var from = $('#form-dialog form');
+        var actionURL = "<%= access_profile_path %>";
+
+        $.ajax ({
+            type: 'GET',
+            url: actionURL,
+            data: {
+                username: username,
+                password: password
+            },
+            success: function(data) {
+                $("profile").html(data);
+            },
+            error:
+            alert("Invalid username or password")
+        })
+    },
+    "Cancel": function() {
+      $(this).dialog('close');
+    }
+  },
+  close: function() {
+    $(this).dialog('destroy');
+  }
+});

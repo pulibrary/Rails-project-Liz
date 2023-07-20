@@ -1,13 +1,27 @@
 Rails.application.routes.draw do
   root "users#index"
 
+  get "/create_account", to: "users#create_account"
+  get "/scoreboard", to: "users#scoreboard", as: "scoreboard"
+
+  get "/edit_profile", to: "users#edit_profile"
+  get "/profile", to: "users#access_profile"
+
+  
+  # get "/access_profile", to: "users#access_profile"
+
+  # resource :user, only: [:edit, :update]
+  
+
+  post "/create_account", to: "users#create"
+
   # get "/users", to: "users#index"
   # get "/users/:id", to: "users#show"
   
-  resources :users
- 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # This creates comments as a nested resource within articles. 
+  #This is another part of capturing the hierarchical relationship that exists between articles and comments.
+  resources :users do
+    resources :scores
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

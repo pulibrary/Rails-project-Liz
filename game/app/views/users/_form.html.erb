@@ -1,3 +1,4 @@
+<%# Create or edit user account  %>
 <%= form_with model: user do |form| %>
     <div>
         <%= form.label :name %><br>
@@ -7,6 +8,8 @@
         <% end %>
     </div>
 
+  <br> <br>
+
   <div>
     <%= form.label :username %><br>
     <%= form.text_field :username %>
@@ -14,6 +17,18 @@
             <div> <%= message %> </div>
         <% end %>
   </div>
+
+  <br> <br>
+
+  <div>
+   <%= form.label :password %><br>
+    <%= form.text_field :password %>
+    <% user.errors.full_messages_for(:password).each do |message| %>
+            <div> <%= message %> </div>
+      <% end %>
+  </div>
+
+<br> <br>
 
   <div>
     <%= form.submit %>

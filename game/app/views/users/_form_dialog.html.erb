@@ -1,0 +1,13 @@
+<!-- app/views/users/_form_dialog.html.erb -->
+<div id="form-dialog" style="display: none;">
+  <%= form_with(model: @user, url: access_profile_path, remote: true) do |form| %>
+    <!-- Form fields go here -->
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+    <!-- Add other form fields as needed -->
+     <%= form.label :password %>
+    <%= form.text_field :password %>
+
+    <%= form.submit %>
+  <% end %>
+</div>

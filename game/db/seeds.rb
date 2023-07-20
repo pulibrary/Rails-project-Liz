@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+ActiveRecord::Base.connection.execute(
+    "INSERT INTO scores (datetime, score, user_id, created_at, updated_at)
+     VALUES (NOW(), '100', '1', NOW(), NOW())"
+  )
+
+  ActiveRecord::Base.connection.execute(
+    "INSERT INTO scores (datetime, score, user_id, created_at, updated_at)
+     VALUES ('2023-07-25 08:30:15', '90', '2', NOW(), NOW())"
+  )
+
+  ActiveRecord::Base.connection.execute(
+    "INSERT INTO scores (datetime, score, user_id, created_at, updated_at)
+     VALUES ('2023-07-20 09:30:15', '80', '3', NOW(), NOW())"
+  )
+  
+  
+  
