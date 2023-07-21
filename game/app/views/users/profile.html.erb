@@ -2,26 +2,29 @@
     <div class="flash-notice"> <%= flash[:notice] %> </div> 
 <% end%>
 
-<% if @user && @data %>
-    <h1> Your Profile: <%= @user.name %> </h1>
 
-    <h3> Username: <%= @user.username%> </h3>
+<h1> Your Profile: <%= @user.name %> </h1>
+
+<h3> Username: <%= @user.username%> </h3>
+
+<% if @data.any? %>
+
     <% @data.each do |score| %>
         <p> <strong> Score:</strong> <%= score.score %> </p>
         <p> <strong> Date-Time: </strong> <%= score.created_at %> </p>
         <br>
     <% end %>
 
+<% else %>
+    <p>No scores found for this user.</p>
+<% end %>
 
-    <ul>
-        <li> <%= link_to "Edit", edit_user_path(@data) %> </li>
-        <li> <%= link_to "Destroy", user_path(@data), data: {
+<ul>
+        <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
+        <li> <%= link_to "Destroy", user_path(@user), data: {
             turbo_method: :delete,
             turbo_confirm: "Are you sure?"
         } %> </li>
     </ul>
-<% else %>
-    <p>No data found for this user.</p>
-<% end %>
 
 <button> <%= link_to "Back", "/users" %> </button>

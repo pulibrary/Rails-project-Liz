@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   get "/scoreboard", to: "users#scoreboard"
   get "/access_profile", to: "users#access_profile"
   get "/authenticate", to: "sessions#new"
-  get "/list_users", to: "users#list_users"
+  get "/list_players", to: "users#list_players"
 
   post "/create_session", to: "sessions#create"
   post "/create_account", to: "users#create"
+  post "/edit", to: "users#edit"
 
   # get "/users", to: "users#index"
   # get "/users/:id", to: "users#show"

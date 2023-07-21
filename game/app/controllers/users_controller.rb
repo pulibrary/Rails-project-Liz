@@ -3,20 +3,19 @@ class UsersController < ApplicationController
     render "index"
   end
 
-  def list_users
-    @users = User.joins(:scores)
+  def list_players
+    @users = User.joins(
+                          <<~SQL
+                            LEFT JOIN (
+                              SELECT user_id, MAX(score) AS highest_score
+                              FROM scores
+                              GROUP BY user_id
+                            ) AS subquery ON users.id = subquery.user_id
+                            SQL
+                        )
                   .select("users.name, users.username, subquery.highest_score as highest_score")
-                  .joins(
-                    <<~SQL
-                      LEFT JOIN (
-                        SELECT user_id, MAX(score) AS highest_score
-                        FROM scores
-                        GROUP BY user_id
-                      ) AS subquery ON users.id = subquery.user_id
-                      SQL
-                  )
                   .order("users.name ASC")
-    render "/users/list_users"
+    render "/users/list_players"
   end
 
   def scoreboard
@@ -49,29 +48,33 @@ class UsersController < ApplicationController
   end
 
   def access_profile
-    p "in access profile method"
     @user = User.find(params[:user_id])
-    p @user
+    p "access profile = #{@user.id}"
+    p "name = #{@user.name}"
     if @user
-      @data = Score.joins(:user) # due to association, "joins" matches id automatically.
+      @data = User.joins(:scores) # due to association, "joins" matches id automatically.
                     .select("users.name, users.username, scores.score, scores.created_at")
-                    .where("scores.score = (SELECT MAX(score) FROM scores where user_id = users.id)")
+                    .where("user_id = #{@user.id}")
                     .order("scores.score DESC")
-                    .limit(10)
 
-      render "users/profile"
+      render "users/profile" # ->  has access to instance variables in controller
     else
       render json: { status: "error", message: "Invalid username or password" }, status: :unprocessable_entity
     end
+  end
+
+  def edit 
+    @user = User.find(params[:id])
+    render "/users/edit_profile", user: @user
   end
 
   def update
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      render "users/profile"
+      redirect_to "/users"
     else 
-      render :edit, status: :unprocessable_entity
+      render :edit_profile, status: :unprocessable_entity
     end
   end
 
