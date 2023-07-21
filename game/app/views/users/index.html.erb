@@ -7,9 +7,7 @@
 <h1> Welcome to Liz's Connect4 Game! </h1>
 
 <%# edit_profile_path automatically generates '/edit_profile' to match route %>
-<%= link_to "Profile", authenticate_path %>
-<br>
-<%= render "dialog_form c" %>
+<button> <%= link_to "Profile", authenticate_path %> </button>
 
 
 
@@ -20,9 +18,13 @@
 
     <li> Once you have an account, access game: 
     <%= link_to "Connect4", "https://papergames.io/en/connect4", target:"_blank" %> </li>
+</ol>
 
+<ul>
     <li> If you would like to see our top players with the highest scores,
     please check out our <%= link_to "Scoreboard", scoreboard_path %>! </li>
-</ol>
+    <li> To see the history of your scores, please click the profile button and log in. </li>
+    <li> See a <%= link_to "list of all players", list_users_path %>!</li>
+</ul>
 
 <h3> Thanks for playing; I hope you have fun! </h3>

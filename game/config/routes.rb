@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
   root "users#index"
-
   get "/create_account", to: "users#create_account"
-  get "/scoreboard", to: "users#scoreboard", as: "scoreboard"
+  get "/scoreboard", to: "users#scoreboard"
+  get "/access_profile", to: "users#access_profile"
+  get "/authenticate", to: "sessions#new"
+  get "/list_users", to: "users#list_users"
 
-  get "/authenticate", to: "users#authenticate"
-  post "/access_profile", to: "users#access_profile"
-
-  # resource :user, only: [:edit, :update]
-  
-
+  post "/create_session", to: "sessions#create"
   post "/create_account", to: "users#create"
 
   # get "/users", to: "users#index"

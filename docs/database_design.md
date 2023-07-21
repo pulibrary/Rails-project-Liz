@@ -1,19 +1,21 @@
+# note: both users and scores table have created_at and updated_at columns, but we only make use of the created_at in the scores table, thus I have only showed that column in scores.
+
 USERS table
 
-id                 name                  username                                             
-(integer)         (string)              (string)                                           
--------------------------------------------------------------
-1                Liz Garcia              lizgarcia                           
-2                Toby Happy               toby10                                     
+id                name           username      password_digest                                  
+(integer)         (string)       (string)                                           
+----------------------------------------------------------------------
+1                Liz Garcia       lizgarcia       liz123                     
+2                Toby Happy       toby10          toby123                            
 
 
 SCORES table
 
-user_id             datetime                           score             
-(integer)          (date)                             (integer)            
+user_id           score               created_at                                   
+(integer)         (integer)           (timestamp)                                      
 ---------------------------------------------------------------------------------
-1                 2023-07-17T12:30:45-04:00           2456 pts               
-2                 2023-07-17T11:30:45-04:00           1345 pts              
+1                 2456 pts         2023-07-17T12:30:45-04:00      
+2                 1345 pts         2023-07-17T11:30:45-04:00
 
 
 
