@@ -38,8 +38,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    duplicate = false
 
-    if @user.save 
+    if @user.valid? && @user.save 
       flash[:notice] = "Account created successfully!"
       redirect_to root_path
     else

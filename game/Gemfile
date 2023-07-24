@@ -76,4 +76,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'axe-core-api'
+  gem 'axe-core-rspec'
+  gem 'factory_bot_rails', require: false
 end
