@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-    factory :user do
-      name { 'Pedro' }
-      username { 'pedro112' }     
-      password { 'xakjs354' }
-    end
+  factory :user do
+    sequence(:name) { "name#{srand}" }
+    sequence(:username) { "username#{srand}" }
+    password { 'xakjs354' }
   end
+end

@@ -1,82 +1,82 @@
 # frozen_string_literal: true
-require "rails_helper"
 
-describe "accessibility", type: :feature, js: true do
-  # let(:user1) { FactoryBot.create(:user) }
-  # let(:user1_id) {user1.id}
-  context "home page" do
+require 'rails_helper'
+
+describe 'accessibility', type: :feature, js: true do
+  user = FactoryBot.create(:user)
+  user_id = user.id
+
+  context 'home page' do
     before do
-      visit "/"
+      visit '/'
     end
 
-    it "complies with wcag" do
+    it 'complies with wcag' do
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa)
     end
   end
 
-  context "authenticate page" do
+  context 'authenticate page' do
     before do
-      visit "localhost:3000/authenticate"
+      visit '/authenticate'
     end
-    it "complies with wcag2aa wcag21a" do
+    it 'complies with wcag2aa wcag21a' do
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa)
     end
   end
 
-  context "profile page" do
+  context 'profile page' do
     before do
-      # user1 = FactoryBot.create(:user)
-      # user1_id = user1.id
-      visit "localhost:3000/access_profile?user_id=#{user1_id}"
+      visit "/access_profile?user_id=#{user_id}"
     end
 
-    it "complies with wcag" do
+    it 'complies with wcag' do
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa)
     end
   end
 
-  context "edit profile page" do
+  context 'edit profile page' do
     before do
-      visit "localhost:3000/users/#{user1_id}/edit"
+      visit "/users/#{user_id}/edit"
     end
 
-    it "complies with wcag" do
+    it 'complies with wcag' do
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa)
     end
   end
 
-  context "create account page" do
+  context 'create account page' do
     before do
-      visit "localhost:3000/create_account"
+      visit '/create_account'
     end
 
-    it "complies with wcag" do
+    it 'complies with wcag' do
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa)
     end
   end
 
-  context "score board page" do
+  context 'score board page' do
     before do
-      visit "localhost:3000/scoreboard"
+      visit '/scoreboard'
     end
 
-    it "complies with wcag" do
+    it 'complies with wcag' do
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa)
     end
   end
 
-  context "list of players page" do
+  context 'list of players page' do
     before do
-      visit "localhost:3000/list_players"
+      visit '/list_players'
     end
 
-    it "complies with wcag" do
+    it 'complies with wcag' do
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa)
     end
