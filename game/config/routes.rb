@@ -11,10 +11,7 @@ Rails.application.routes.draw do
   post "/create_account", to: "users#create"
   # put "/update", to: "users#update"
   
-  # This creates comments as a nested resource within articles. 
-  #This is another part of capturing the hierarchical relationship 
-  #that exists between articles and comments:
-
+  # This is another part of capturing the hierarchical relationship that exists between articles and comments.
   resources :users do
     resources :scores
   end
