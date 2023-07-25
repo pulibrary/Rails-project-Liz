@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+# sequence is used to generate unique username
 FactoryBot.define do
   factory :user do
-    sequence(:name) { "name#{srand}" }
+    name { "name#{srand}" }
     sequence(:username) { "username#{srand}" }
     password { 'xakjs354' }
   end
 end
+

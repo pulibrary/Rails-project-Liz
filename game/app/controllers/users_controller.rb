@@ -38,7 +38,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    duplicate = false
 
     if @user.valid? && @user.save 
       flash[:notice] = "Account created successfully!"
@@ -50,8 +49,9 @@ class UsersController < ApplicationController
 
   def access_profile
     @user = User.find(params[:user_id])
-    p "access profile = #{@user.id}"
-    p "name = #{@user.name}"
+    # Note: can test as follows
+    # p "access profile = #{@user.id}"
+    # p "name = #{@user.name}"
     if @user
       @data = User.joins(:scores) # due to association, "joins" matches id automatically.
                     .select("users.name, users.username, scores.score, scores.created_at")
