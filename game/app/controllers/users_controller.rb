@@ -50,6 +50,12 @@ class UsersController < ApplicationController
 
   def access_profile
     @user = User.find(params[:user_id])
+<<<<<<< HEAD
+=======
+    # Note: can test as follows
+    # p "access profile = #{@user.id}"
+    # p "name = #{@user.name}"
+>>>>>>> cc7aa17 (Included flash message for unsuccesful updates of account information)
     @data = User.joins(:scores) # due to association, "joins" matches id automatically.
                   .select("users.name, users.username, scores.score, scores.created_at")
                   .where("user_id = #{@user.id}")

@@ -9,9 +9,12 @@ Rails.application.routes.draw do
 
   post "/create_session", to: "sessions#create"
   post "/create_account", to: "users#create"
-  # put "/update", to: "users#update"
-  
-  # This is another part of capturing the hierarchical relationship that exists between articles and comments.
+  post "/edit", to: "users#edit"
+
+   
+  # This is another part of capturing the hierarchical relationship 
+  # that exists between articles and comments:
+
   resources :users do
     resources :scores
   end
