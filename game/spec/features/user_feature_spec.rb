@@ -41,15 +41,18 @@ RSpec.feature 'User feature testing', type: :feature do
         expect(page).to have_text('Updated account successfully!') 
     end
 
-    # scenario 'see newly updated account in list of players and then return to home page' do
-    #     click_on 'list of all players'
+    it 'accesses list of players' do
+        user = FactoryBot.create(:user)
+        visit root_path
+        click_on 'list of all players'
 
-    #     expect(page).to have_text('New username')
+        expect(page).to have_text(user.name)
+        expect(page).to have_text(user.username)
 
-    #     click_on 'Back'
+        click_on 'Back'
 
-    #     expect(page).to have_text('Welcome to Liz\'s Connect4 Game!')
-    # end
+        expect(page).to have_text('Welcome to Liz\'s Connect4 Game!')
+    end
 end
 
-# Currently, I do  not have functionalities for scoreboard.
+# Currently, I do  not have functionalities for scoreboard (will do after Javascript training).

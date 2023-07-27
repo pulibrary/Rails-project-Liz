@@ -1,6 +1,9 @@
 <% if flash[:notice] %>
     <div class="flash-notice"> <%= flash[:notice] %> </div> 
+<%elsif flash[:alert]%>
+    <div class="flash-alert"><%= flash[:alert] %> </div>
 <% end%>
+
 <br>
 
 <h1> Your Profile: <%= @user.name %> </h1>
@@ -19,13 +22,14 @@
     <p>No scores found for this user.</p>
 <% end %>
 
-<%# <ul>     edit_user_path is the standard path set by resources :users %>
-        <li> <%= link_to "Edit", edit_user_path(@user.id), class: "btn btn-secondary" %> </li>
+    <ul> <%# edit_user_path is the standard path set by resources :users %>
+        <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
         <br>
-        <li> <%= link_to "Destroy", users_path(@user), class: "btn btn-secondary", data: {
+        <%# user_path points to route -> delete '/users/:id', to: 'users#destroy' %>
+        <li> <%= link_to "Delete", user_path(@user), data: {
             turbo_method: :delete,
             turbo_confirm: "Are you sure?"
         } %> </li>
     </ul>
-
+<br>
 <%= link_to "Back", "/" %>

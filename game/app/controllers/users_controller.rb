@@ -70,18 +70,27 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:notice] = "Updated account successfully!"
-      redirect_to "/users"
+      redirect_to "/users" #same as root_path
     else 
-      flash[:alert] = "Something went wrong with the update."
+      flash[:alert] = "Update unsuccessful. Contact administrator."
       render :edit_profile, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    @user = User.find(params[:id]) 
+    @data = User.joins(:scores) # due to association, "joins" matches id automatically.
+                .select("users.name, users.username, scores.score, scores.created_at")
+                .where("user_id = #{@user.id}")
+                .order("scores.score DESC")
 
-    redirect_to root_path, status: :see_other
+    if 1==0
+      flash[:notice] = 'User was successfully deleted.'
+      redirect_to root_path
+    else
+      flash[:alert] = 'Deletion unsuccessful. Contact administrator.'
+      render :profile, status: :unprocessable_entity
+    end
   end
 
   private
