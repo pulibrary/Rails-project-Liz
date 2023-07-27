@@ -69,10 +69,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:notice] = "Updated account successfully!"
+      flash[:notice] = "Updated account information successfully!"
       redirect_to "/users" #same as root_path
     else 
-      flash[:alert] = "Update unsuccessful. Contact administrator."
+      flash[:alert] = "Unsuccessful account update. Please contact administrator."
       render :edit_profile, status: :unprocessable_entity
     end
   end
@@ -84,11 +84,11 @@ class UsersController < ApplicationController
                 .where("user_id = #{@user.id}")
                 .order("scores.score DESC")
 
-    if 1==0
-      flash[:notice] = 'User was successfully deleted.'
+    if @user.destroy
+      flash[:notice] = 'Account was successfully deleted!'
       redirect_to root_path
     else
-      flash[:alert] = 'Deletion unsuccessful. Contact administrator.'
+      flash[:alert] = 'Unsuccessful account deletion. Please contact administrator.'
       render :profile, status: :unprocessable_entity
     end
   end
