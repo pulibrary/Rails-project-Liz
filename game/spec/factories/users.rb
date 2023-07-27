@@ -4,7 +4,7 @@
 FactoryBot.define do
   factory :user do
     name { "name#{srand}" }
-    sequence(:username) { "username#{srand}" }
+    sequence(:username) { "username#{rand}" }
     password { 'xakjs354' }
   end
 end

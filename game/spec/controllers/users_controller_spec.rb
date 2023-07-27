@@ -68,4 +68,10 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to be_successful
     end
   end
+
+  context 'POST #update' do
+    it 'returns a success response' do
+      get :edit_profile, params: {user: user}
+      expect(response).to be_successful
+    end
 end
