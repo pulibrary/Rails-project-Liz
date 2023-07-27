@@ -43,6 +43,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Account created successfully!"
       redirect_to root_path
     else
+      flash["alert"] = "Unsuccessful account creation. Please contract administrator."
       render :create_account, status: :unprocessable_entity
     end
   end
