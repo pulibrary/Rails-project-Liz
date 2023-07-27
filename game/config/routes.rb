@@ -12,9 +12,16 @@ Rails.application.routes.draw do
 
   
   # This creates comments as a nested resource within articles. 
-  #This is another part of capturing the hierarchical relationship that exists between articles and comments.
+  #This is another part of capturing the hierarchical relationship 
+  #that exists between articles and comments:
+
   # resources :users do
   #   resources :scores
   # end
+
+  # Note: I can use the Rails resources to not explicitly define
+  # user, new, edit, delete, and show paths for their respective
+  # controller action methods, but for learning purposes, I wrote
+  # the paths and action method names myself without resources. 
 
 end

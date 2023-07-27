@@ -1,5 +1,5 @@
 <%# Create or edit user account  %>
-<%= form_with model: user do |form| %>
+<%= form_with model: user, url: create_account_path do |form| %>
     <div>
         <%= form.label :name %><br>
         <%= form.text_field :name %>
