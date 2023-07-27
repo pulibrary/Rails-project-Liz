@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   post "/create_account", to: "users#create"
   post "/edit", to: "users#edit"
 
-   
-  #This is another part of capturing the hierarchical relationship 
-  #that exists between users and scores:
+  
+  # This is another part of capturing the hierarchical relationship 
+  # that exists between articles and comments:
   resources :users do
     resources :scores
   end

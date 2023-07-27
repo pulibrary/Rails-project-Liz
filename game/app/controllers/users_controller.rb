@@ -67,10 +67,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:notice] = "Updated account information successfully!"
-      redirect_to "/users" #same as root_path
+      redirect_to "/users"
     else 
-      flash[:alert] = "Unsuccessful account update."
       render :edit_profile, status: :unprocessable_entity
     end
   end
