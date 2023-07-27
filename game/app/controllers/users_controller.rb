@@ -52,16 +52,12 @@ class UsersController < ApplicationController
     # Note: can test as follows
     # p "access profile = #{@user.id}"
     # p "name = #{@user.name}"
-    if @user
-      @data = User.joins(:scores) # due to association, "joins" matches id automatically.
-                    .select("users.name, users.username, scores.score, scores.created_at")
-                    .where("user_id = #{@user.id}")
-                    .order("scores.score DESC")
+    @data = User.joins(:scores) # due to association, "joins" matches id automatically.
+                  .select("users.name, users.username, scores.score, scores.created_at")
+                  .where("user_id = #{@user.id}")
+                  .order("scores.score DESC")
 
-      render "users/profile" # ->  has access to instance variables in controller
-    else
-      render json: { status: "error", message: "Invalid username or password" }, status: :unprocessable_entity
-    end
+    render "users/profile" # ->  has access to instance variables in controller
   end
 
   def edit 
@@ -73,8 +69,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
+      flash[:notice] = "Updated account successfully!"
       redirect_to "/users"
     else 
+      flash[:alert] = "Something went wrong with the update."
       render :edit_profile, status: :unprocessable_entity
     end
   end

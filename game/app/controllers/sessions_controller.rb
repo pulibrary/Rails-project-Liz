@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
             # redirect_to :access_profile, params: {user_id: user.id}
             redirect_to access_profile_path(user_id: @user.id)
         else
-            flash.now[:alert] = "Invalid username or password"
+            flash.now[:alert] = "Invalid username or password."
             render :new,  status: :unprocessable_entity
         end
     end

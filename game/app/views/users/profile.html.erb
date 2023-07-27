@@ -1,7 +1,7 @@
 <% if flash[:notice] %>
     <div class="flash-notice"> <%= flash[:notice] %> </div> 
 <% end%>
-
+<br>
 
 <h1> Your Profile: <%= @user.name %> </h1>
 
@@ -19,12 +19,13 @@
     <p>No scores found for this user.</p>
 <% end %>
 
-<ul>
-        <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
-        <li> <%= link_to "Destroy", user_path(@user), data: {
+<%# <ul>     edit_user_path is the standard path set by resources :users %>
+        <li> <%= link_to "Edit", edit_user_path(@user.id), class: "btn btn-secondary" %> </li>
+        <br>
+        <li> <%= link_to "Destroy", users_path(@user), class: "btn btn-secondary", data: {
             turbo_method: :delete,
             turbo_confirm: "Are you sure?"
         } %> </li>
     </ul>
 
-<%= link_to "Back", "/users" %>
+<%= link_to "Back", "/" %>
