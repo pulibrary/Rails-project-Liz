@@ -75,3 +75,4 @@ RSpec.feature 'User feature testing', type: :feature, js: true do
 end
 
 # Currently, I do  not have functionalities for scoreboard (will do after Javascript training).
+# Next test for scoreboard could be: it 'plays game and checks score in scoreboard page'
