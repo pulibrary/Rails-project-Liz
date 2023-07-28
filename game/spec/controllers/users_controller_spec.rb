@@ -27,7 +27,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context 'GET #access_profile' do
-    it 'successfully renders login page' do
+    it 'successfully renders profile page' do
       get :access_profile, params: {user_id: user_id}
       expect(response).to be_successful
     end
