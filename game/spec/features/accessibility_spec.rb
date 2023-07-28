@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'accessibility', type: :feature, js: true do
+describe 'accessibility testing:', type: :feature, js: true do
   user = FactoryBot.create(:user)
   user_id = user.id
 
