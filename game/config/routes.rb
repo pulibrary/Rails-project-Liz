@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   get "/access_profile", to: "users#access_profile"
   get "/authenticate", to: "sessions#new"
   get "/list_players", to: "users#list_players"
+  # get "/edit", to: "users#edit"
 
   post "/create_session", to: "sessions#create"
   post "/create_account", to: "users#create"
-  post "/edit", to: "users#edit"
-
+  # put "/update", to: "users#update"
   
   # This creates comments as a nested resource within articles. 
   #This is another part of capturing the hierarchical relationship 

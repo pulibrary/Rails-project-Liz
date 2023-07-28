@@ -73,7 +73,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Updated account information successfully!"
       redirect_to "/users" #same as root_path
     else 
-      flash[:alert] = "Unsuccessful account update. Please contact administrator."
+      flash[:alert] = "Unsuccessful account update."
       render :edit_profile, status: :unprocessable_entity
     end
   end
@@ -89,7 +89,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'Account was successfully deleted!'
       redirect_to root_path
     else
-      flash[:alert] = 'Unsuccessful account deletion. Please contact administrator.'
+      flash[:alert] = 'Unsuccessful account deletion.'
       render :profile, status: :unprocessable_entity
     end
   end

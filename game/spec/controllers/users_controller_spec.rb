@@ -4,37 +4,45 @@ RSpec.describe UsersController, type: :controller do
   user = FactoryBot.create(:user)
   user_id = user.id
 
+
   context "GET #index" do
-    it 'returns a success response' do
+    it 'successfully renders index page' do
       get :index
       expect(response).to be_successful
     end
   end
 
   context 'GET #create_account' do
-    it 'returns a success response' do
+    it 'successfully renders create account page' do
       get :create_account
       expect(response).to be_successful
     end
   end
 
   context 'GET #scoreboard' do
-    it 'returns a success response' do
+    it 'successfully renders scoreboard page' do
       get :scoreboard
       expect(response).to be_successful
     end
   end
 
   context 'GET #access_profile' do
-    it 'returns a success response' do
+    it 'successfully renders login page' do
       get :access_profile, params: {user_id: user_id}
       expect(response).to be_successful
     end
   end
 
   context 'GET #list_players' do
-    it 'returns a success response' do
+    it 'successfully renders list of players page' do
       get :list_players
+      expect(response).to be_successful
+    end
+  end
+
+  context 'GET #edit' do
+    it 'successfully renders edit profile page' do
+      get :edit, params: {id: user_id}
       expect(response).to be_successful
     end
   end
@@ -47,31 +55,60 @@ RSpec.describe UsersController, type: :controller do
 # A 302 status code does not fall into this range, hence the failure.
 # SO: use be_redirect instead of be_successful for this test.
   context 'POST #create' do
-    it 'returns a success response' do
-      # user_params = {user: {name: "A#{user.name}", username: "A#{user.username}", password: user.password}}
-      # p "user params = #{user_params}"
-      user_params = {
-        user: {
-          name: user.name,
-          username: "new_username_#{user.username}",
-          password: "new_password"
-        }
+    user_params = {
+      user: {
+        name: user.name,
+        username: "new_username_#{user.username}",
+        password: "new_password"
       }
+    }
+    it 'successfully creates new account' do
       post :create, params: user_params
       expect(response).to be_redirect
     end
-  end
 
-  context 'POST #edit' do
-    it 'returns a success response' do
-      get :edit, params: {id: user_id}
-      expect(response).to be_successful
+    it 'successfully redirects to home page' do
+      post :create, params: user_params
+      expect(response).to redirect_to root_path
     end
   end
 
-  context 'POST #update' do
-    it 'returns a success response' do
-      get :edit_profile, params: {user: user}
-      expect(response).to be_successful
+  context 'PATCH #update' do
+    user_params = {
+      id: user_id,
+      user: {
+        name: "updated name",
+        username: "updated username",
+        password: "updated_password"
+      }
+    }
+
+    it 'successfully updates account information' do
+      patch :update, params: user_params
+      # Fetch latest data from database
+      user.reload
+      expect(user.name).to eq("updated name")
+      expect(user.username).to eq("updated username")
+      expect(user.authenticate("updated_password")).to be_truthy
     end
+
+    it 'redirects to the home page' do
+      patch :update, params: user_params
+      expect(response).to redirect_to "/users"
+    end
+  end
+
+  context 'DELETE #destroy' do
+    it 'successfully deletes account' do
+      expect {
+        delete :destroy, params: {id: user_id}
+      }.to change(User, :count).by(-1)
+    end
+  
+    it 'redirects to the home page' do
+      delete :destroy, params: {id: user_id}
+      expect(response).to redirect_to root_path
+    end
+  end
+
 end
