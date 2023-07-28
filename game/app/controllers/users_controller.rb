@@ -69,6 +69,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to "/users"
     else 
+      flash[:alert] = "Unsuccessful account update."
       render :edit_profile, status: :unprocessable_entity
     end
   end

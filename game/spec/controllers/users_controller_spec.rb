@@ -28,10 +28,14 @@ RSpec.describe UsersController, type: :controller do
 
   context 'GET #access_profile' do
 <<<<<<< HEAD
+<<<<<<< HEAD
     it 'successfully renders profile page' do
 =======
     it 'successfully renders login page' do
 >>>>>>> 45de828 (Finalize user controller spec; each action method has a test now and all tests pass.)
+=======
+    it 'successfully renders login page' do
+>>>>>>> 9ba7aa7 (Finalize user controller spec; each action method has a test now and all tests pass.)
       get :access_profile, params: {user_id: user_id}
       expect(response).to be_successful
     end
