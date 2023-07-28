@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   post "/edit", to: "users#edit"
 
    
-  # This is another part of capturing the hierarchical relationship 
-  # that exists between articles and comments:
-
+  #This is another part of capturing the hierarchical relationship 
+  #that exists between users and scores:
   resources :users do
     resources :scores
   end
