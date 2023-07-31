@@ -1,14 +1,13 @@
 #profile-button {
     background-color: rgb(144, 54, 234);
     color:aliceblue;
-    font-weight: bold;
     padding: 10% 20%;
     text-decoration: none;
     border-radius: 30%;   
 }
 
 .profile-button-shadow:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .profile-container {
