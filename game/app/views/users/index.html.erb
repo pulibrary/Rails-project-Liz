@@ -1,32 +1,37 @@
 <%# http://localhost:3000/users %>
 
-<%# Flash messages  %>
-<% if flash[:notice] %>
-    <div class="flash-notice"> <%= flash[:notice] %> </div> 
-<% end%>
+<div class="index-content">
+    <%# Flash messages  %>
+    <% if flash[:notice] %>
+        <div class="flash-notice"> <%= flash[:notice] %> </div> 
+    <% end%>
 
-<br> 
-<h1> Welcome to Liz's Connect4 Game! </h1>
+    <div class="profile-container"> <%= link_to "Profile", authenticate_path, id: "profile-button", class: "profile-button-shadow" %> </div>
 
-<%# edit_profile_path automatically generates '/edit_profile' to match route %>
-<%= link_to "Profile", authenticate_path %> 
+    <br> 
+    <h1> Welcome to Liz's Connect4 Game! </h1>
+
+    <div class="instructions">
+        <h2 style="text-decoration: underline;"> Instructions: <h2>
+        <ol>
+            <li> To access and play the game, first <%= link_to "create an account", create_account_path %> 
+            if you do not already own one. </li>
+
+            <li> Once you have an account, access game: 
+            <%= link_to "Connect4", "https://papergames.io/en/connect4", target:"_blank" %> </li>
+        </ol>
+
+        <ul>
+            <li> If you would like to see our top players with the highest scores,
+            please check out our <%= link_to "Scoreboard", scoreboard_path %>! </li>
+            <li> To see the history of your scores, please click the profile button and log in. </li>
+            <li> See a <%= link_to "list of all players", list_players_path %>!</li>
+        </ul>
+    </div>
+
+    <div class="welcome-gif-container"> <%= image_tag("welcome-index.gif", alt: "cute apple cartoon waving hello and welcoming users", class: "welcome-gif") %> </div>
+</div>
+
+<h2 id="final-message"> Thanks for playing; I hope you have fun! </h2>
 
 
-
-<h2> Instructions: <h2>
-<ol>
-    <li> To access and play the game, first <%= link_to "create an account", create_account_path %> 
-    if you do not already own one. </li>
-
-    <li> Once you have an account, access game: 
-    <%= link_to "Connect4", "https://papergames.io/en/connect4", target:"_blank" %> </li>
-</ol>
-
-<ul>
-    <li> If you would like to see our top players with the highest scores,
-    please check out our <%= link_to "Scoreboard", scoreboard_path %>! </li>
-    <li> To see the history of your scores, please click the profile button and log in. </li>
-    <li> See a <%= link_to "list of all players", list_players_path %>!</li>
-</ul>
-
-<h3> Thanks for playing; I hope you have fun! </h3>
