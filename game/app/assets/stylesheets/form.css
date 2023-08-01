@@ -1,0 +1,10 @@
+.form-content {
+    display: flex;
+    justify-content: center;
+}
+
+.edit-profile-button {
+    display:flex;
+    justify-content: center;
+    margin-right: 7.5%;
+}

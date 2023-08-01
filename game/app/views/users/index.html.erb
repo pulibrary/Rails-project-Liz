@@ -3,7 +3,9 @@
 <div class="index-content">
     <%# Flash messages  %>
     <% if flash[:notice] %>
-        <div class="flash-notice"> <%= flash[:notice] %> </div> 
+        <div class="flash-notice"> 
+            <span> <%= flash[:notice] %> </span>
+        </div> 
     <% end%>
 
     <div class="profile-button-container"> <%= link_to "Profile", authenticate_path, class: "profile-button button-shadow" %> </div>
