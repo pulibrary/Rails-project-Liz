@@ -1,28 +1,52 @@
-<% if flash[:notice] %>
-    <div class="flash-notice"> <%= flash[:notice] %> </div> 
-<%elsif flash[:alert]%>
-    <div class="flash-alert"><%= flash[:alert] %> </div>
-<% end%>
+<div class="profile-nav-container">
+    <%# <div class="flash-messages-container"> %>
+        <% if flash[:notice] %>
+            <div class="flash-notice">
+                <span> <%= flash[:notice] %> </span> 
+            </div> 
+        <%elsif flash[:alert]%>
+            <div class="flash-alert">
+                <span> <%= flash[:alert] %> </span>
+            </div>
+        <% end %>
+    <%# </div> %>
+ 
+    <div class="profile-links-nav">
+        <%# edit_user_path is the standard path set by resources :users %>
+        <%= link_to "Edit", edit_user_path(@user.id), class: "decor-button button-shadow" %> 
 
-<br>
+        <%# user_path points to route -> delete '/users/:id', to: 'users#destroy' %>
+        <%= link_to "Delete", user_path(@user), class: "decor-button button-shadow", data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+        } %> 
+
+        <%= link_to "Back", "/authenticate", class: "decor-button button-shadow" %>
+    </div>
+</div>
 
 <h1> Your Profile: <%= @user.name %> </h1>
+<h3 class="profile-username"> Username: <u><%= @user.username%></u> </h3>
 
-<h3> Username: <%= @user.username%> </h3>
-
-<% if @data.any? %>
-
-    <% @data.each do |score| %>
-        <p> <strong> Score:</strong> <%= score.score %> </p>
-        <p> <strong> Date-Time: </strong> <%= score.created_at %> </p>
-        <br>
+<div class="profile-content">
+    <% if @data.any? %>
+        <div class="scores-container">
+            <% @data.each do |score| %>
+                <div class="score-item">
+                    <p> <strong> Score:</strong> <%= score.score %> </p>
+                    <p> <strong> Date-Time: </strong> <%= score.created_at %> </p>
+                </div>
+            <% end %>
+        </div>
+    <% else %>
+        <p>No scores found for this user.</p>
     <% end %>
 
 <% else %>
     <p>No scores found for this user.</p>
 <% end %>
 
-<ul>
+    <ul>
         <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
         <li> <%= link_to "Destroy", user_path(@user), data: {
             turbo_method: :delete,
@@ -31,3 +55,4 @@
     </ul>
 
 <%= link_to "Back", "/users" %>
+</div>
