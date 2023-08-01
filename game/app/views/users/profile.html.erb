@@ -26,7 +26,7 @@
 </div>
 
 <h1> Your Profile: <%= @user.name %> </h1>
-<h3 class="profile-username"> Username: <u><%= @user.username%></u> </h3>
+<h3 class="profile-username-and-message"> Username: <u><%= @user.username%></u> </h3>
 
 <div class="profile-content">
     <% if @data.any? %>
@@ -39,7 +39,7 @@
             <% end %>
         </div>
     <% else %>
-        <p>No scores found for this user.</p>
+        <p class="profile-username-and-message">No scores found for this user.</p>
     <% end %>
 
 <% else %>
