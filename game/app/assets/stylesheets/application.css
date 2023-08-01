@@ -89,3 +89,36 @@ a {
   justify-content: flex-end;
   margin-right: 4%;
 }
+
+
+/* Table styling */
+
+.table {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-collapse: collapse;
+  width: 75%;
+  margin: 3% auto 0 auto; /* clockwise: top, right, bottom, left */
+}
+
+.table td, .table th {
+  border: 1px solid #706f6f;
+  padding: 8px;
+  text-align: center;
+}
+
+.table tr:nth-child(even){background-color: #f2f2f2;}
+.table tr:nth-child(odd){background-color: #fadcf6;}
+.table tr:hover{background-color: #ddd;}
+
+.table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: purple;
+  color: white;
+}
+
+.table-caption {
+  font-weight: bolder;
+  font-size: 23px;
+  margin-bottom: 2%;
+}
