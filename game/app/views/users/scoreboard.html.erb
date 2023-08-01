@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Scoreboard</title>
-  </head>
-  <body>
-    <h1>Scoreboard</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Score</th>
-          <th>Date and Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= user.name %></td>
-            <td><%= user.highest_score %></td>
-            <td><%= user.datetime %> </td> 
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<div class="back-button"> 
+  <%= link_to "Back", "/", class: "decor-button button-shadow" %> 
+</div>
+<h1> Scoreboard </h1>
 
-    <br>
-    <%= link_to "Back", "/" %>
-  </body>
-</html>
+<table id="scoreboard-table">
+  <caption class="table-caption"> Top 10 players with the highest scores: </caption>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Score</th>
+      <th scope="col">Date and Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.highest_score %></td>
+        <td><%= user.datetime %> </td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
