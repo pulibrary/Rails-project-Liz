@@ -4,8 +4,9 @@
     justify-content: center;
 }
 
-.edit-profile-button {
-    display:flex;
+.form-back-button {
+    display: flex;
     justify-content: center;
-    margin-right: 7.5%;
+    position: relative;
+    right: 47px;
 }
