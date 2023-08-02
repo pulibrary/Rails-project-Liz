@@ -3,6 +3,9 @@ class UsersController < ApplicationController
     render "index"
   end
 
+  # By using GROUP BY users.id, we ensure that we get one row for
+  # each unique user (i.e., one row per users.id), and the MAX(scores.score) 
+  # function will give us the highest score for each user.
   def list_players
     @users = User.joins(
                           <<~SQL
@@ -19,12 +22,8 @@ class UsersController < ApplicationController
   end
 
   def scoreboard
-    # By using GROUP BY users.id, we ensure that we get one row for
-    # each unique user (i.e., one row per users.id), and the MAX(scores.score) 
-    # function will give us the highest score for each user.
-    @users = User.joins("LEFT JOIN scores on users.id = scores.user_id")
-                 .select('users.name, scores.score as highest_score, scores.created_at as datetime')
-                 .where("scores.score = (SELECT MAX(score) FROM scores WHERE user_id = users.id)")
+    @users = User.joins(:scores)
+                 .select('users.name, users.username, scores.score as highest_score, scores.created_at as datetime')
                  .order('highest_score DESC, scores.created_at DESC')
                  .limit(10)
     render "users/scoreboard"

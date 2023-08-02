@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
+      <th scope="col">Username</th>
       <th scope="col">Score</th>
       <th scope="col">Date and Time</th>
     </tr>
@@ -16,6 +17,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
+        <td><%= user.username %></td>
         <td><%= user.highest_score %></td>
         <td><%= user.datetime %> </td> 
       </tr>
