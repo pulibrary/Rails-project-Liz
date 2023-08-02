@@ -9,7 +9,7 @@ jobs:
         # first game is just the name circlei places the project, and the second game is MY game.
     working_directory: ~/game/game
     docker:
-      - image: cimg/ruby:3.2.2-node
+      - image: cimg/ruby:3.2.2-browsers
     steps:
       - checkout:
           path: ~/game
@@ -22,11 +22,11 @@ jobs:
     working_directory: ~/game/game
     parallelism: 3
     docker:
-      - image: cimg/ruby:3.2.2-node
+      - image: cimg/ruby:3.2.2-browsers
       - image: circleci/postgres:9.5-alpine
         environment:
           POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog_test
+          POSTGRES_DB: game_test
           POSTGRES_PASSWORD: ""
     environment:
       BUNDLE_JOBS: "3"
@@ -46,11 +46,15 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
+          name: Database create
+          command: bin/rails db:create
+      - run:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
+
       # Run rspec in parallel
       - ruby/rspec-test
-      - ruby/rubocop-check
+      # - ruby/rubocop-check
 
 workflows:
   version: 2

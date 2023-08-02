@@ -74,11 +74,11 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "webdrivers"
   gem 'axe-core-api'
   gem 'axe-core-rspec'
   gem 'factory_bot_rails', require: false
   gem "byebug"
   gem "webdrivers"
+  gem 'rspec_junit_formatter'
 end
 
