@@ -6,16 +6,20 @@ orbs:
 
 jobs:
   build:
+        # first game is just the name circlei places the project, and the second game is MY game.
+    working_directory: ~/game/game
     docker:
       - image: cimg/ruby:3.2.2-node
     steps:
-      - checkout
+      - checkout:
+          path: ~/game
       - ruby/install-deps
       # Store bundle cache
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      #     cache-key: "yarn.lock"
   test:
+    working_directory: ~/game/game
     parallelism: 3
     docker:
       - image: cimg/ruby:3.2.2-node
@@ -32,11 +36,12 @@ jobs:
       PGPASSWORD: ""
       RAILS_ENV: test
     steps:
-      - checkout
+      - checkout:
+          path: ~/game
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      #     cache-key: "yarn.lock"
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
