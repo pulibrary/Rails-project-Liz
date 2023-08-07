@@ -44,18 +44,4 @@
     <% else %>
         <p class="profile-username-and-message">No scores found for this user.</p>
     <% end %>
-
-<% else %>
-    <p>No scores found for this user.</p>
-<% end %>
-
-    <ul>
-        <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
-        <li> <%= link_to "Destroy", user_path(@user), data: {
-            turbo_method: :delete,
-            turbo_confirm: "Are you sure?"
-        } %> </li>
-    </ul>
-
-<%= link_to "Back", "/users" %>
 </div>
