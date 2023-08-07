@@ -39,10 +39,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.valid? && @user.save 
-      flash[:notice] = "Account created successfully!"
+      flash[:notice] = "Created account successfully!"
       redirect_to root_path
     else
-      flash["alert"] = "Unsuccessful account creation. Please contract administrator."
+      flash["alert"] = "Unsuccessful account creation."
       render :create_account, status: :unprocessable_entity
     end
   end
@@ -66,6 +66,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
+      flash[:notice] = "Updated account information successfully!!"
       redirect_to "/users"
     else 
       flash[:alert] = "Unsuccessful account update."
@@ -81,7 +82,7 @@ class UsersController < ApplicationController
                 .order("scores.score DESC")
 
     if @user.destroy
-      flash[:notice] = 'Account was successfully deleted!'
+      flash[:notice] = 'Deleted account successfully!'
       redirect_to root_path
     else
       flash[:alert] = 'Unsuccessful account deletion.'
