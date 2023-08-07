@@ -1,3 +1,7 @@
+<%# Create or edit user account  %>
+<%# Note: that update path (rather than create) is followed automatically by resources. 
+It knows we are updating because we call edit path beforehand. %>
+
 <%= form_with model: user do |form| %>
     <div>
         <%= form.label :name %><br>
@@ -7,6 +11,8 @@
         <% end %>
     </div>
 
+  <br> <br>
+
   <div>
     <%= form.label :username %><br>
     <%= form.text_field :username %>
@@ -15,7 +21,19 @@
         <% end %>
   </div>
 
+  <br> <br>
+
   <div>
-    <%= form.submit %>
+   <%= form.label :password %><br>
+    <%= form.text_field :password %>
+    <% user.errors.full_messages_for(:password).each do |message| %>
+            <div> <%= message %> </div>
+      <% end %>
+  </div>
+
+<br> <br>
+
+  <div>
+    <%= form.submit "Submit" %>
   </div>
 <% end %>

@@ -1,0 +1,14 @@
+<% if flash[:alert] %>
+  <div class="flash-alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<br>
+<h1> Update User Account Information</h1>
+
+<%= render "form", user: @user %>
+
+<br>
+
+<%= link_to "Back", access_profile_path(user_id: @user.id) %>

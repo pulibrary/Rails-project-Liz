@@ -1,0 +1,33 @@
+<h1>Login</h1>
+
+<% if flash[:notice] %>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="flash-alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<br>
+
+<%= form_tag create_session_path do %>
+  <div>
+    <%= label_tag :username %>
+    <%= text_field_tag :username %>
+  </div>
+  <br>
+  <div>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <br>
+  <%= submit_tag 'Login' %>
+<% end %>
+
+<br>
+
+<%= link_to "Back", "/" %>

@@ -1,0 +1,27 @@
+<h1> List of Players </h1>
+
+<table>
+    <thead>
+      <tr>
+        <th> Count </th>
+        <th> Name</th>
+        <th> Username</th>
+        <th>Highest Score</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% count = 0%>
+    <% @users.each do |user| %>
+    <% count += 1%>
+      <tr>
+        <td> <%= count %> </td>
+        <td><%= user.name %> </td>
+        <td><%= user.username %> </td>
+        <td> <%= user.highest_score %> </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+<%= link_to "Back", "/" %> 

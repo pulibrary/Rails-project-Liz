@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scoreboard</title>
+  </head>
+  <body>
+    <h1>Scoreboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Score</th>
+          <th>Date and Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.highest_score %></td>
+            <td><%= user.datetime %> </td> 
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <%= link_to "Back", "/" %>
+  </body>
+</html>
