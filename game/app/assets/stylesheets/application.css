@@ -14,15 +14,13 @@
  *= require_self
  */
 
-
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap');
-
 body {
   background-color: papayawhip;
   display: flex;
   flex-direction: column;
   margin: 2% 3% 0 3%;
   min-height: 100vh;
+  font-family: 'Atkinson Hyperlegible','Times New Roman', sans-serif;
 }
 
 h1 {
@@ -32,7 +30,6 @@ h1 {
   border-radius: 5%;
   border-style: solid;
   border-color: black;
-  font-family: 'Chakra Petch', sans-serif;
 }
 
 a:hover {
@@ -46,6 +43,10 @@ a {
 
 .instructions a {
   text-decoration: underline;
+}
+
+.instructions-content {
+  font-size: 1.5rem;
 }
 
 .flash-notice {
@@ -98,7 +99,6 @@ a {
 /* Table styling */
 
 .table {
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border-collapse: collapse;
   width: 75%;
   margin: 3% auto 0 auto; /* clockwise: top, right, bottom, left */
