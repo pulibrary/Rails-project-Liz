@@ -31,17 +31,19 @@
 <h1> Your Profile: <%= @user.name %> </h1>
 <h3 class="profile-username-and-message"> Username: <u><%= @user.username%></u> </h3>
 
-<div>
-    <% if @data.any? %>
-        <div class="scores-container">
-            <% @data.each do |score| %>
-                <div class="score-item">
-                    <p> <strong> Score:</strong> <%= score.score %> </p>
-                    <p> <strong> Date-Time: </strong> <%= score.created_at %> </p>
-                </div>
-            <% end %>
-        </div>
-    <% else %>
-        <p class="profile-username-and-message">No scores found for this user.</p>
-    <% end %>
-</div>
+<main>
+    <div>
+        <% if @data.any? %>
+            <div class="scores-container">
+                <% @data.each do |score| %>
+                    <div class="score-item">
+                        <p> <strong> Score:</strong> <%= score.score %> </p>
+                        <p> <strong> Date-Time: </strong> <%= score.created_at %> </p>
+                    </div>
+                <% end %>
+            </div>
+        <% else %>
+            <p class="profile-username-and-message">No scores found for this user.</p>
+        <% end %>
+    </div>
+</main>

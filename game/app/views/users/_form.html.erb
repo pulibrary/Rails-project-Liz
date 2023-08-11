@@ -2,7 +2,7 @@
 <%# Note: update path (rather than create) is followed automatically by resources. 
 It knows we are updating because we call edit path beforehand. %>
 
-<div class="form-content">
+<main> <div class="form-content">
   <%= form_with model: user do |form| %>
       <div>
           <%= form.label :name %><br>
@@ -38,4 +38,4 @@ It knows we are updating because we call edit path beforehand. %>
       <%= form.submit "Submit" %>
     </div>
   <% end %>
-</div>
+</div> </main>

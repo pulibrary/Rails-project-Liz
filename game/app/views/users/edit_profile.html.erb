@@ -7,10 +7,12 @@
 <br>
 <h1> Update Your Account Information</h1>
 
-<%= render "form", user: @user %>
+<main>
+  <%= render "form", user: @user %>
 
-<br>
+  <br>
 
-<div class="form-back-button">
-  <%= link_to "Back", access_profile_path(user_id: @user.id), class: "decor-button button-shadow" %> 
-</div>
+  <div class="form-back-button">
+    <%= link_to "Back", access_profile_path(user_id: @user.id), class: "decor-button button-shadow" %> 
+  </div>
+</main>
