@@ -1,0 +1,40 @@
+.profile-button {
+    background-color: rgb(144, 54, 234);
+    color:aliceblue;
+    padding: 10% 20%;
+    text-decoration: none;
+    border-radius: 30%;   
+}
+
+.profile-button-container {
+    /* This div will inherit the flex container property from body and align-self: flex-end; will move it to the right side. */
+    align-self: flex-end;
+    margin-right: 5%;
+}
+
+.index-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+#final-message {
+    text-align: center;
+    color:rgb(167, 7, 12);
+    flex-shrink: 0;
+    padding-bottom: 10%;
+}
+
+.instructions {
+    padding-top: 2%;
+}
+
+.welcome-gif {
+    width: 200px;
+    border: 3px double rgb(133, 9, 9);
+}
+
+.welcome-gif-container {
+    text-align: center;
+    border-color: brown;
+}

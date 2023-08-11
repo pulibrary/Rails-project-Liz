@@ -1,12 +1,18 @@
+<div class="back-button"> 
+  <%= link_to "Back", "/", class: "decor-button button-shadow" %> 
+</div>
+
 <h1> List of Players </h1>
 
-<table>
+<main>
+  <table class="table">
+    <caption class="table-caption"> Information about all players: </caption>
     <thead>
       <tr>
-        <th> Count </th>
-        <th> Name</th>
-        <th> Username</th>
-        <th>Highest Score</th>
+        <th scope="col">Count </th>
+        <th scope="col">Name</th>
+        <th scope="col">Username</th>
+        <th scope="col">User's Highest Score</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +28,4 @@
     <% end %>
     </tbody>
   </table>
-
-  <br>
-<%= link_to "Back", "/" %> 
+</main>

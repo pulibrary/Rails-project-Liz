@@ -10,7 +10,7 @@ RSpec.feature 'User feature testing', type: :feature, js: true do
         fill_in 'Password', with: '123'
         click_button 'Submit'
         
-        expect(page).to have_text('Account created successfully!') 
+        expect(page).to have_text('Created account successfully!') 
     end
  
     it 'accesses profile and edits account info' do
@@ -56,7 +56,7 @@ RSpec.feature 'User feature testing', type: :feature, js: true do
             click_on 'Delete'
         end
 
-        expect(page).to have_text('Account was successfully deleted!')
+        expect(page).to have_text('Deleted account successfully!')
     end
 
 

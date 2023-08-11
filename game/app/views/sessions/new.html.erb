@@ -2,32 +2,34 @@
 
 <% if flash[:notice] %>
   <div class="flash-notice">
-    <%= flash[:notice] %>
+    <span> <%= flash[:notice] %> </span>
   </div>
 <% end %>
 
 <% if flash[:alert] %>
   <div class="flash-alert">
-    <%= flash[:alert] %>
+    <span> <%= flash[:alert] %> </span>
   </div>
 <% end %>
 
-<br>
+<main>
+  <div class="login-content">
+    <%= form_tag create_session_path do %>
+      <div>
+        <%= label_tag :username %>
+        <%= text_field_tag :username %>
+      </div>
+      <br>
+      <div>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+      </div>
+      <br>
+      <div class="login-submit-button"> <%= submit_tag 'Login' %> </div>
+    <% end %>
 
-<%= form_tag create_session_path do %>
-  <div>
-    <%= label_tag :username %>
-    <%= text_field_tag :username %>
+    <br>
+
+    <div class="login-back-button"> <%= link_to "Back", "/", class: "decor-button button-shadow" %> </div>
   </div>
-  <br>
-  <div>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
-  <br>
-  <%= submit_tag 'Login' %>
-<% end %>
-
-<br>
-
-<%= link_to "Back", "/" %>
+</main>

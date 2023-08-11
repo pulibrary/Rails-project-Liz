@@ -3,6 +3,9 @@ class UsersController < ApplicationController
     render "index"
   end
 
+  # By using GROUP BY users.id, we ensure that we get one row for
+  # each unique user (i.e., one row per users.id), and the MAX(scores.score) 
+  # function will give us the highest score for each user.
   def list_players
     @users = User.joins(
                           <<~SQL
@@ -19,12 +22,8 @@ class UsersController < ApplicationController
   end
 
   def scoreboard
-    # By using GROUP BY users.id, we ensure that we get one row for
-    # each unique user (i.e., one row per users.id), and the MAX(scores.score) 
-    # function will give us the highest score for each user.
-    @users = User.joins("LEFT JOIN scores on users.id = scores.user_id")
-                 .select('users.name, scores.score as highest_score, scores.created_at as datetime')
-                 .where("scores.score = (SELECT MAX(score) FROM scores WHERE user_id = users.id)")
+    @users = User.joins(:scores)
+                 .select('users.name, users.username, scores.score as highest_score, scores.created_at as datetime')
                  .order('highest_score DESC, scores.created_at DESC')
                  .limit(10)
     render "users/scoreboard"
@@ -40,10 +39,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.valid? && @user.save 
-      flash[:notice] = "Account created successfully!"
+      flash[:notice] = "Created account successfully!"
       redirect_to root_path
     else
-      flash["alert"] = "Unsuccessful account creation. Please contract administrator."
+      flash["alert"] = "Unsuccessful account creation."
       render :create_account, status: :unprocessable_entity
     end
   end
@@ -67,8 +66,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:notice] = "Updated account information successfully!"
-      redirect_to "/users" #same as root_path
+      flash[:notice] = "Updated account information successfully!!"
+      redirect_to "/users"
     else 
       flash[:alert] = "Unsuccessful account update."
       render :edit_profile, status: :unprocessable_entity
@@ -83,7 +82,7 @@ class UsersController < ApplicationController
                 .order("scores.score DESC")
 
     if @user.destroy
-      flash[:notice] = 'Account was successfully deleted!'
+      flash[:notice] = 'Deleted account successfully!'
       redirect_to root_path
     else
       flash[:alert] = 'Unsuccessful account deletion.'

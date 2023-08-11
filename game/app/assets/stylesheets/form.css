@@ -1,0 +1,12 @@
+.form-content {
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-back-button {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 47px;
+}

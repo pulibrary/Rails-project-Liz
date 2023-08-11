@@ -1,0 +1,39 @@
+.flash-messages-container {
+    text-align: center;
+    align-items: flex-end;
+}
+
+
+.profile-links-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-link {
+    margin-left: 3%;
+}
+
+.right-links-container {
+    display:flex;
+    gap: 20px;
+    margin-right: 5%;
+}
+
+.decor-button2 {
+    background-color: rgb(144, 54, 234);
+    color:aliceblue;
+    padding: 2% 3%;
+    text-decoration: none;
+    border-radius: 30%;  
+  }
+
+.scores-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-left: 5%; 
+}
+
+.profile-username-and-message {
+    margin-left: 5%;
+}

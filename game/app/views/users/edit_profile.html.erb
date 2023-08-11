@@ -5,10 +5,14 @@
 <% end %>
 
 <br>
-<h1> Update User Account Information</h1>
+<h1> Update Your Account Information</h1>
 
-<%= render "form", user: @user %>
+<main>
+  <%= render "form", user: @user %>
 
-<br>
+  <br>
 
-<%= link_to "Back", access_profile_path(user_id: @user.id) %>
+  <div class="form-back-button">
+    <%= link_to "Back", access_profile_path(user_id: @user.id), class: "decor-button button-shadow" %> 
+  </div>
+</main>
