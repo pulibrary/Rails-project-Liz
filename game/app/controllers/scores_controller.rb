@@ -1,5 +1,7 @@
 class ScoresController < ApplicationController
-    # TODO after javascript training: https://github.com/pulibrary/Rails-project-Liz/issues/13
+    def access_game
+        render "connect4"
+    end
    
     private 
 
