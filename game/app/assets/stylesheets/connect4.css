@@ -33,3 +33,14 @@
     background-color: yellow;
 }
 
+#winner {
+    text-align: center;
+}
+
+.winner-red {
+    color: red;
+}
+
+.winner-yellow {
+    color: rgb(112, 112, 4);
+}

@@ -11,6 +11,79 @@ var currColumns = []; //keeps track of which row each column is at.
 
 window.onload = function() {
     setGame();
+    // setTimeout(loginPlayers, 300);
+    loginPlayers();
+}
+
+async function loginPlayers() {
+    let usernameRedPlayer;
+    let usernameYellowPlayer;
+    
+    try {
+        usernameRedPlayer = await getPlayerUsername('RED');
+        usernameYellowPlayer = await getPlayerUsername('YELLOW');
+        
+    } catch (error) {
+        console.error("Error:", error);
+        throw new Error(error)
+    }
+}
+
+async function getPlayerUsername(color) {
+    let username;
+    let notValid = true;
+        while (notValid) {
+            username = prompt(`Please enter your username to play as the ${color} player:`);
+            //By utilizing async/await, the function returns a Promise that resolves to either true or false
+            if (await checkUsernameValidity(username)) {
+                console.log("Test: inside 1st while loop")
+                notValid = false;
+            }
+        }
+        console.log("Test: after while loops")
+        console.log("Test: user = " + username)
+    return username
+}
+
+// this function is used to get the CSRF token from the meta tags that Rails automatically
+// inserts into the page when you use <%= csrf_meta_tags %>. 
+// IMPORTANT: For every user session, a token is generated.
+// This token is then used to make sure that the JavaScript fetch request is authorized
+//  and isn't a cross-site request forgery.
+// It will look for a meta tag like: <meta name="csrf-token" content="some_token_value">.
+//  ** It's a mechanism to verify that form submissions or AJAX requests made to your Rails application
+// come from the application's own pages and not from external sources.
+function getMetaContent(metaName) {
+    return document.querySelector("meta[name='" + metaName + "']").getAttribute("content");
+  }
+
+async function checkUsernameValidity(username) {
+    try {
+        const response = await fetch("/validate_username?username=" + encodeURIComponent(username), {
+            method: "GET",
+            headers: {
+                "X-CSRF-Token": getMetaContent('csrf-token')
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        
+        if (data.valid) {
+            console.log(data.message);  // username exists
+            return true;
+        } else {
+            console.log(data.message);  // username does not exist
+            return false;
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        // Depending on how you want to handle errors, you might return false, true, or throw the error again.
+        throw new Error(error);
+    }
 }
 
 function setGame() {
@@ -48,7 +121,7 @@ function setPiece() {
     // figure out which row the current column should be on
     r = currColumns[c]; 
 
-    if (r < 0) { // board[r][c] != ' '
+    if (r < 0) { // as we set tiles, we subtract 1 from r. Check if out of bounds. board[r][c] != ' '
         return;
     }
 
@@ -122,9 +195,11 @@ function checkWinner() {
 function setWinner(r, c) {
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
-        winner.innerText = "Red Wins";             
+        winner.innerText = "Red Wins!";   
+        winner.classList.add("winner-red")          
     } else {
-        winner.innerText = "Yellow Wins";
+        winner.innerText = "Yellow Wins!";
+        winner.classList.add("winner-yellow")
     }
     gameOver = true;
 }

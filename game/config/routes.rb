@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/authenticate", to: "sessions#new"
   get "/list_players", to: "users#list_players"
   get "/connect4", to: "scores#access_game"
+  get "validate_username", to: "scores#validate_username"
 
   post "/create_session", to: "sessions#create"
   post "/create_account", to: "users#create"
