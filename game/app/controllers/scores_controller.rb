@@ -12,6 +12,10 @@ class ScoresController < ApplicationController
             render json: { valid: false, message: "does not exist." }
         end
     end
+
+    def setScore
+        
+    end
    
     private 
 

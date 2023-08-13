@@ -37,10 +37,10 @@
     text-align: center;
 }
 
-.winner-red {
+.winner-red, #red-player {
     color: red;
 }
 
-.winner-yellow {
+.winner-yellow, #yellow-player {
     color: rgb(112, 112, 4);
 }

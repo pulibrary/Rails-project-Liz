@@ -1,27 +1,31 @@
-var playerRed = "R";
-var playerYellow = "Y";
-var currPlayer = playerRed;
+let playerRed = "R";
+let playerYellow = "Y";
+let currPlayer = playerRed;
 
-var gameOver = false;
-var board;
+let gameOver = false;
+let board;
 
-var rows = 6;
-var columns = 7;
-var currColumns = []; //keeps track of which row each column is at.
+let rows = 6;
+let columns = 7;
+let currColumns = []; //keeps track of which row each column is at.
 
-window.onload = function() {
-    setGame();
-    // setTimeout(loginPlayers, 300);
-    loginPlayers();
+window.onload = async function() {
+    let [usernameRedPlayer, usernameYellowPlayer] = await loginPlayers();
+    setGame(usernameRedPlayer, usernameYellowPlayer);
 }
 
 async function loginPlayers() {
     let usernameRedPlayer;
     let usernameYellowPlayer;
+    let redPlayer = document.getElementById("red-player");
+    let yellowPlayer = document.getElementById("yellow-player");
     
     try {
         usernameRedPlayer = await getPlayerUsername('RED');
+        redPlayer.innerText = `Red Player: ${usernameRedPlayer}`;
         usernameYellowPlayer = await getPlayerUsername('YELLOW');
+        yellowPlayer.innerText = `Yellow Player: ${usernameYellowPlayer}`;
+        return [usernameRedPlayer, usernameYellowPlayer]
         
     } catch (error) {
         console.error("Error:", error);
@@ -59,6 +63,12 @@ function getMetaContent(metaName) {
 
 async function checkUsernameValidity(username) {
     try {
+        // The encoding ensures that characters, which might be interpreted 
+        // as control characters in the URL, are safely transmitted.
+        // When the encoded URL reaches the Rails server, Rails automatically
+        // decodes the parameters for you. So, by the time you access params[:username],
+        // the value is already decoded, and you get the original username string that 
+        // you can use to look up in your database.
         const response = await fetch("/validate_username?username=" + encodeURIComponent(username), {
             method: "GET",
             headers: {
@@ -86,7 +96,7 @@ async function checkUsernameValidity(username) {
     }
 }
 
-function setGame() {
+function setGame(usernameRedPlayer, usernameYellowPlayer) {
     board = [];
     // row height of 0 to 5 indexed for each column. We start at 5, the bottom.
     currColumns = [5, 5, 5, 5, 5, 5, 5];
@@ -101,20 +111,20 @@ function setGame() {
             let tile = document.createElement("div");
             tile.id = r.toString() + "-" + c.toString();
             tile.classList.add("tile");
-            tile.addEventListener("click", setPiece);
+            tile.addEventListener("click", (event) => setPiece(event, usernameRedPlayer, usernameYellowPlayer));
             document.getElementById("board").append(tile);
         }
         board.push(row);
     }
 }
 
-function setPiece() {
+function setPiece(event, usernameRedPlayer, usernameYellowPlayer) {
     if (gameOver) {
         return;
     }
 
     // get coords of the tile clicked
-    let coords = this.id.split("-");
+    let coords = event.target.id.split("-");
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
 
@@ -139,16 +149,16 @@ function setPiece() {
     r -= 1; // update the row height for that column
     currColumns[c] = r; // update the array
 
-    checkWinner();
+    checkWinner(usernameRedPlayer, usernameYellowPlayer);
 }
 
-function checkWinner() {
+function checkWinner(usernameRedPlayer, usernameYellowPlayer) {
      // horizontal
      for (let r = 0; r < rows; r++) {
          for (let c = 0; c < columns - 3; c++){ // 0 to 3 = 4 tiles
             if (board[r][c] != ' ') { // TODO: needed check?
                 if (board[r][c] == board[r][c+1] && board[r][c+1] == board[r][c+2] && board[r][c+2] == board[r][c+3]) {
-                    setWinner(r, c);
+                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
                     return;
                 }
             }
@@ -160,7 +170,7 @@ function checkWinner() {
         for (let r = 0; r < rows - 3; r++) {
             if (board[r][c] != ' ') {
                 if (board[r][c] == board[r+1][c] && board[r+1][c] == board[r+2][c] && board[r+2][c] == board[r+3][c]) {
-                    setWinner(r, c);
+                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
                     return;
                 }
             }
@@ -172,7 +182,7 @@ function checkWinner() {
         for (let c = 0; c < columns - 3; c++) {
             if (board[r][c] != ' ') {
                 if (board[r][c] == board[r+1][c+1] && board[r+1][c+1] == board[r+2][c+2] && board[r+2][c+2] == board[r+3][c+3]) {
-                    setWinner(r, c);
+                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
                     return;
                 }
             }
@@ -184,7 +194,7 @@ function checkWinner() {
         for (let c = 0; c < columns - 3; c++) {
             if (board[r][c] != ' ') {
                 if (board[r][c] == board[r-1][c+1] && board[r-1][c+1] == board[r-2][c+2] && board[r-2][c+2] == board[r-3][c+3]) {
-                    setWinner(r, c);
+                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
                     return;
                 }
             }
@@ -192,14 +202,16 @@ function checkWinner() {
     }
 }
 
-function setWinner(r, c) {
+function setWinner(r, c, usernameRedPlayer, usernameYellowPlayer) {
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
-        winner.innerText = "Red Wins!";   
+        winner.innerText = `${usernameRedPlayer} Wins!`;   
         winner.classList.add("winner-red")          
     } else {
-        winner.innerText = "Yellow Wins!";
+        winner.innerText = `${usernameYellowPlayer} Wins!`;
         winner.classList.add("winner-yellow")
     }
+    // set score for winner.
+
     gameOver = true;
 }
