@@ -9,14 +9,15 @@ let rows = 6;
 let columns = 7;
 let currColumns = []; //keeps track of which row each column is at.
 
+let usernameRedPlayer;
+let usernameYellowPlayer;
+
 window.onload = async function() {
-    let [usernameRedPlayer, usernameYellowPlayer] = await loginPlayers();
+    await loginPlayers();
     setGame(usernameRedPlayer, usernameYellowPlayer);
 }
 
 async function loginPlayers() {
-    let usernameRedPlayer;
-    let usernameYellowPlayer;
     let redPlayer = document.getElementById("red-player");
     let yellowPlayer = document.getElementById("yellow-player");
     
@@ -25,7 +26,6 @@ async function loginPlayers() {
         redPlayer.innerText = `Red Player: ${usernameRedPlayer}`;
         usernameYellowPlayer = await getPlayerUsername('YELLOW');
         yellowPlayer.innerText = `Yellow Player: ${usernameYellowPlayer}`;
-        return [usernameRedPlayer, usernameYellowPlayer]
         
     } catch (error) {
         console.error("Error:", error);
@@ -96,7 +96,7 @@ async function checkUsernameValidity(username) {
     }
 }
 
-function setGame(usernameRedPlayer, usernameYellowPlayer) {
+function setGame() {
     board = [];
     // row height of 0 to 5 indexed for each column. We start at 5, the bottom.
     currColumns = [5, 5, 5, 5, 5, 5, 5];
@@ -111,20 +111,20 @@ function setGame(usernameRedPlayer, usernameYellowPlayer) {
             let tile = document.createElement("div");
             tile.id = r.toString() + "-" + c.toString();
             tile.classList.add("tile");
-            tile.addEventListener("click", (event) => setPiece(event, usernameRedPlayer, usernameYellowPlayer));
+            tile.addEventListener("click", setPiece);
             document.getElementById("board").append(tile);
         }
         board.push(row);
     }
 }
 
-function setPiece(event, usernameRedPlayer, usernameYellowPlayer) {
+function setPiece() {
     if (gameOver) {
         return;
     }
 
     // get coords of the tile clicked
-    let coords = event.target.id.split("-");
+    let coords = this.id.split("-");
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
 
@@ -149,16 +149,16 @@ function setPiece(event, usernameRedPlayer, usernameYellowPlayer) {
     r -= 1; // update the row height for that column
     currColumns[c] = r; // update the array
 
-    checkWinner(usernameRedPlayer, usernameYellowPlayer);
+    checkWinner();
 }
 
-function checkWinner(usernameRedPlayer, usernameYellowPlayer) {
+function checkWinner() {
      // horizontal
      for (let r = 0; r < rows; r++) {
          for (let c = 0; c < columns - 3; c++){ // 0 to 3 = 4 tiles
             if (board[r][c] != ' ') { // TODO: needed check?
                 if (board[r][c] == board[r][c+1] && board[r][c+1] == board[r][c+2] && board[r][c+2] == board[r][c+3]) {
-                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
+                    setWinner(r, c);
                     return;
                 }
             }
@@ -170,7 +170,7 @@ function checkWinner(usernameRedPlayer, usernameYellowPlayer) {
         for (let r = 0; r < rows - 3; r++) {
             if (board[r][c] != ' ') {
                 if (board[r][c] == board[r+1][c] && board[r+1][c] == board[r+2][c] && board[r+2][c] == board[r+3][c]) {
-                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
+                    setWinner(r, c);
                     return;
                 }
             }
@@ -182,7 +182,7 @@ function checkWinner(usernameRedPlayer, usernameYellowPlayer) {
         for (let c = 0; c < columns - 3; c++) {
             if (board[r][c] != ' ') {
                 if (board[r][c] == board[r+1][c+1] && board[r+1][c+1] == board[r+2][c+2] && board[r+2][c+2] == board[r+3][c+3]) {
-                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
+                    setWinner(r, c);
                     return;
                 }
             }
@@ -194,7 +194,7 @@ function checkWinner(usernameRedPlayer, usernameYellowPlayer) {
         for (let c = 0; c < columns - 3; c++) {
             if (board[r][c] != ' ') {
                 if (board[r][c] == board[r-1][c+1] && board[r-1][c+1] == board[r-2][c+2] && board[r-2][c+2] == board[r-3][c+3]) {
-                    setWinner(r, c, usernameRedPlayer, usernameYellowPlayer);
+                    setWinner(r, c);
                     return;
                 }
             }
@@ -202,7 +202,7 @@ function checkWinner(usernameRedPlayer, usernameYellowPlayer) {
     }
 }
 
-function setWinner(r, c, usernameRedPlayer, usernameYellowPlayer) {
+function setWinner(r, c) {
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
         winner.innerText = `${usernameRedPlayer} Wins!`;   
