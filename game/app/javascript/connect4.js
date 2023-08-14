@@ -13,7 +13,7 @@ let currColumns = []; //keeps track of which row each column is at.
 
 let usernameRedPlayer;
 let usernameYellowPlayer;
-let rounds = 0;
+let rounds = 1;
 let totalRounds = 0;
 
 window.onload = function() {
@@ -24,6 +24,7 @@ window.onload = function() {
         totalRounds = getNumberRounds();
         await loginPlayers();
         setTurn();
+        setRound();
     }, 100);
 }
 
@@ -37,6 +38,11 @@ function setTurn() {
         turn.innerText = `${usernameYellowPlayer}'s turn to play!`;
         winner.className = "yellow-text"; 
     }
+}
+
+function setRound() {
+    let roundHeader = document.getElementById("round-header");
+    roundHeader.innerText = `Round ${rounds}/${totalRounds}`;
 }
 
 function setGame() {
@@ -86,6 +92,7 @@ function createNextRoundButton() {
         roundOver = false;
         setGame();
         setTurn();
+        setRound();
     });
 
     buttonDiv.appendChild(button);
@@ -282,7 +289,7 @@ function setWinner(r, c) {
         let yellowRoundScore = document.getElementById("yellow-score");
         updateScore(yellowRoundScore);
     }
-    if (rounds == totalRounds) {
+    if (rounds == totalRounds + 1) { // + 1 to indicate we would be at 4th round, meaning we finished 3 rounds.
         gameOver = true;
         winner.className = "game-over"
         winner.innerText = "Game Over!"

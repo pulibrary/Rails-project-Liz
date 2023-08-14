@@ -35,21 +35,34 @@
     background-color: yellow;
 }
 
+#round-header {
+    text-align: center;
+    margin: 0; /* reset default margins */
+}
+
 #winner {
     text-align: center;
+    margin-bottom: 2%;
 }
 
 .red-text {
     color: red;
+    margin: 0;
 }
 
-/* .scoreboard-container {
+.scoreboard-container {
     display: flex;
     justify-content: space-between;
-} */
+    align-items: center;
+}
+
+#middle-div {
+    align-self: auto;
+}
 
 .yellow-text {
     color: rgb(112, 112, 4);
+    margin: 0;
 }
 
 #connect4-button-div {

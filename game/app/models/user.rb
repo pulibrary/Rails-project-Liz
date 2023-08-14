@@ -3,7 +3,7 @@ class User < ApplicationRecord
     has_many :scores
     
     validates :name, presence: true
-    validates :username, presence: true, length: {minimum: 3}
+    validates :username, presence: true, length: {minimum: 3, maximum: 10}
     validates :password, presence: true
     validates :username, uniqueness: { case_sensitive: true }
 end
