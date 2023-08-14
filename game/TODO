@@ -1,0 +1,18 @@
+- [x] Set text in UI to include what player is what; useful for setting scores later.
+- [x] Include next session button
+    - [x] Clears out board
+    - [x] Clears out “winner”
+    - [x] Instruct whose color player turn it is
+    - [x] Update players’ color
+    - [ ] Change date time to only date in schema
+    - [x] Indicate when the game is over
+    - [x] Indicate what round players are at
+        - [x]  show final scores and FINAL WINNER!
+    - [x] Display score of current round for each player
+        - [ ] Update score where day = now() by 1 once player wins game (each point is a win against a player per GAME)
+- [x] Once game is over, include restart game button => page redirect
+- [ ] Create accessibility tests for connect 4
+- [ ] feature tests ... 
+- [ ] Model tests ... 
+- [ ] Include rubocop in circleci!
+- [ ] Include ticket for feedback
