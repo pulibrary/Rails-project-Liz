@@ -6,14 +6,14 @@
 
 <main>
   <table class="table">
-    <caption class="table-caption"> Top 10 players with the highest scores: </caption>
+    <caption class="table-caption"> Top 10 players with most wins in a day: </caption>
     <thead>
       <tr>
       <th scope="col">Position</th>
         <th scope="col">Name</th>
         <th scope="col">Username</th>
         <th scope="col">Score</th>
-        <th scope="col">Date and Time</th>
+        <th scope="col">Date</th>
       </tr>
     </thead>
     <tbody>
@@ -25,7 +25,7 @@
           <td><%= user.name %></td>
           <td><%= user.username %></td>
           <td><%= user.highest_score %></td>
-          <td><%= user.datetime %> </td> 
+          <td><%= user.date %> </td> 
         </tr>
       <% end %>
     </tbody>

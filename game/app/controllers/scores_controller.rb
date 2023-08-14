@@ -17,9 +17,6 @@ class ScoresController < ApplicationController
         render "connect4" # displays html
     end
     
-    # def setScore
-        
-    # end
    
     private 
 

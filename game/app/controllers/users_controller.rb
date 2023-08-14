@@ -23,8 +23,8 @@ class UsersController < ApplicationController
 
   def scoreboard
     @users = User.joins(:scores)
-                 .select('users.name, users.username, scores.score as highest_score, scores.created_at as datetime')
-                 .order('highest_score DESC, scores.created_at DESC')
+                 .select('users.name, users.username, scores.score as highest_score, scores.updated_at as date')
+                 .order('highest_score DESC, scores.updated_at DESC')
                  .limit(10)
     render "users/scoreboard"
   end
@@ -50,9 +50,9 @@ class UsersController < ApplicationController
   def access_profile
     @user = User.find(params[:user_id])
     @data = User.joins(:scores) # due to association, "joins" matches id automatically.
-                  .select("users.name, users.username, scores.score, scores.created_at")
+                  .select("users.name, users.username, scores.score, scores.updated_at as date")
                   .where("user_id = #{@user.id}")
-                  .order("scores.score DESC")
+                  .order("scores.score DESC, date DESC")
 
     render "users/profile" # ->  has access to instance variables in controller
   end
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id]) 
     @data = User.joins(:scores) # due to association, "joins" matches id automatically.
-                .select("users.name, users.username, scores.score, scores.created_at")
+                .select("users.name, users.username, scores.score, scores.updated_at")
                 .where("user_id = #{@user.id}")
                 .order("scores.score DESC")
 

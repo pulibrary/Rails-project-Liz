@@ -9,7 +9,6 @@
 # Command to execute file: 
 # $ bundle exec rails db:seed
 
-# db/seeds.rb
 
 # Destroy all previous records
 Score.destroy_all
@@ -37,6 +36,10 @@ users_data.each do |user_data|
   10.times do 
     Score.create!(score: rand(0..150), user_id: user.id)
   end
+
+  Score.create!(score: 100, user_id: user.id, updated_at: "2022-02-12")
+  Score.create!(score: 100, user_id: user.id)
 end
+
 
   
