@@ -1,8 +1,10 @@
+// connect4 tutorial for initial implementation: https://youtu.be/4ARsthVnCTg 
 let playerRed = "R";
 let playerYellow = "Y";
 let currPlayer = playerRed;
 
 let gameOver = false;
+let roundOver = false;
 let board;
 
 let rows = 6;
@@ -11,8 +13,8 @@ let currColumns = []; //keeps track of which row each column is at.
 
 let usernameRedPlayer;
 let usernameYellowPlayer;
-let rounds = 0
-let totalRounds = 0
+let rounds = 0;
+let totalRounds = 0;
 
 window.onload = function() {
     setGame();
@@ -49,7 +51,7 @@ function setGame() {
     }
 }
 
-// this function is supposed to run ONCE
+// this function is supposed to run ONCE.
 function createNextRoundButton() {
     // create "Next Round" button
     let buttonDiv = document.getElementById("connect4-button-div");
@@ -64,8 +66,9 @@ function createNextRoundButton() {
     button.addEventListener("click", function(event) {
         // Prevent the default link behavior (don't want to navigate anywhere)
         event.preventDefault();
-        var winner = document.getElementById("winner");
+        let winner = document.getElementById("winner");
         winner.innerText = "";
+        roundOver = false;
         setGame();
     });
 
@@ -73,15 +76,15 @@ function createNextRoundButton() {
 }
 
 function getNumberRounds() {
-    let total = 0
+    let total = 0;
     do {
         const userInput = prompt("Enter INTEGER number of rounds desired to play, between 1 and 10:")
         // parse int with base 10
         total = parseInt(userInput, 10);
         console.log(`Test: totalRounds = ${total}`)
     } while (!Number.isInteger(total) || !(1 <= total && total <= 10));
-    console.log("outside of while in getNumberRounds")
-    return total
+    console.log("outside of while in getNumberRounds");
+    return total;
 }
 
 async function loginPlayers() {
@@ -96,7 +99,7 @@ async function loginPlayers() {
         
     } catch (error) {
         console.error("Error:", error);
-        throw new Error(error)
+        throw new Error(error);
     }
 }
 
@@ -106,9 +109,9 @@ async function getPlayerUsername(color) {
         username = prompt(`Please enter your username to play as the ${color} player:`);
     } while(!(await checkUsernameValidity(username)));
 
-        console.log("Test: after while loops")
-        console.log("Test: user = " + username)
-    return username
+        console.log("Test: after while loops");
+        console.log("Test: user = " + username);
+    return username;
 }
 
 // this function is used to get the CSRF token from the meta tags that Rails automatically
@@ -159,9 +162,11 @@ async function checkUsernameValidity(username) {
 }
 
 function setPiece() {
-    if (gameOver) {
+    console.log("Setting piece!")
+    if (gameOver || roundOver) {
         return;
     }
+    console.log(`gameOver = ${gameOver}`)
 
     // get coords of the tile clicked
     let coords = this.id.split("-");
@@ -243,14 +248,15 @@ function checkWinner() {
 }
 
 function setWinner(r, c) {
-    rounds += 1
+    roundOver = true;
+    rounds += 1;
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
         winner.innerText = `${usernameRedPlayer} Wins!`;   
-        winner.classList.add("winner-red")          
+        winner.className = "winner-red";          
     } else {
         winner.innerText = `${usernameYellowPlayer} Wins!`;
-        winner.classList.add("winner-yellow")
+        winner.className = "winner-yellow";
     }
     // set score for winner.
 
