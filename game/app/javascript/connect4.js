@@ -42,6 +42,7 @@ function setGame() {
             tile.id = r.toString() + "-" + c.toString();
             tile.classList.add("tile");
             tile.addEventListener("click", setPiece);
+            // adds the tile (div element) to the end of this "board" element's list of child nodes.
             document.getElementById("board").append(tile);
         }
         board.push(row);
@@ -63,7 +64,8 @@ function createNextRoundButton() {
     button.addEventListener("click", function(event) {
         // Prevent the default link behavior (don't want to navigate anywhere)
         event.preventDefault();
-
+        var winner = document.getElementById("winner");
+        winner.innerText = "";
         setGame();
     });
 
