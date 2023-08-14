@@ -274,37 +274,41 @@ function checkWinner() {
     }
 }
 
+function getScore(element) {
+    let scoreString = element.innerText;
+    let score = parseInt(scoreString.charAt(scoreString.length - 1), 10);
+    return score
+}
+
 function setWinner(r, c) {
     roundOver = true;
     rounds += 1;
+    let redScoreElement = document.getElementById("red-score");
+    let yellowScoreElement = document.getElementById("yellow-score");
     let winner = document.getElementById("winner");
+
     if (board[r][c] == playerRed) {
         winner.innerText = `${usernameRedPlayer} Wins!`;   
         winner.className = "red-text";
         // update round score
-        let redScore = document.getElementById("red-score");
-        updateScore(redScore);
+        updateScore(redScoreElement);
 
     } else {
         winner.innerText = `${usernameYellowPlayer} Wins!`;
         winner.className = "yellow-text";
         // update round score
-        let yellowScore = document.getElementById("yellow-score");
-        updateScore(yellowScore);
+        updateScore(yellowScoreElement);
     }
+
+    // Handle when game is over
     if (rounds == totalRounds + 1) { // + 1 to indicate we would be at 4th round, meaning we finished 3 rounds.
         gameOver = true;
         let roundHeader = document.getElementById("round-header");
         roundHeader.className = "game-over";
         roundHeader.innerText = "Game Over!";
 
-        // determine who is the FINAL WINNER of game (not round)
-        let redScoreString = document.getElementById("red-score").innerText;
-        let redScore = parseInt(redScoreString.charAt(redScoreString.length - 1), 10);
-        let yellowScoreString = document.getElementById("yellow-score").innerText;
-        let yellowScore = parseInt(yellowScoreString.charAt(yellowScoreString.length - 1), 10);
-
-        if (redScore > yellowScore) {
+        // determine who is the FINAL WINNER of game (not round) after final score update.
+        if (getScore(redScoreElement) > getScore(yellowScoreElement)) {
             winner.innerText = `${usernameRedPlayer} is the final winner!`;
             winner.className = "red-text";
         } else {
@@ -313,7 +317,7 @@ function setWinner(r, c) {
         } 
 
         // show button to start new game => reload of page
-        setGameOverButton();
+        startNewGame();
     }
 
     // show button to begin next round
@@ -322,12 +326,11 @@ function setWinner(r, c) {
 }
 
 function updateScore(element) { 
-    let scoreString = element.innerText;
-    let score = scoreString.charAt(scoreString.length - 1);
+    let score = getScore(element);
     element.innerText = `Score: ${parseInt(score, 10) + 1}`;
 }
 
-function setGameOverButton() {
+function startNewGame() {
     let buttonDiv = document.getElementById("connect4-button-div");
     buttonDiv.innerHTML = "";
     // create game over button
