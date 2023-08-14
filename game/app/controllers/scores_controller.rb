@@ -13,10 +13,10 @@ class ScoresController < ApplicationController
         end
     end
 
-    def begin_round
-        
+    def start_new_game
+        render "connect4" # displays html
     end
-
+    
     # def setScore
         
     # end

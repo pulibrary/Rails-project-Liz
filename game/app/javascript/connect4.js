@@ -46,7 +46,7 @@ function setGame() {
 
     // Clear out (any) existing board for next round
     const boardElement = document.getElementById("board");
-    boardElement.innerHTML = '';
+    boardElement.innerHTML = "";
 
     for (let r = 0; r < rows; r++) {
         let row = [];
@@ -275,18 +275,36 @@ function setWinner(r, c) {
         winner.innerText = `${usernameYellowPlayer} Wins!`;
         winner.className = "winner-yellow";
     }
-    // set score for winner.
+    // TODO: set score for winner.
 
+    
     if (rounds == totalRounds) {
         gameOver = true;
         winner.className = "game-over"
         winner.innerText = "Game Over!"
+
         // show button to start new game => reload of page
-        
-        
+        setGameOverButton();
     }
 
     // show button to begin next round
     let buttonDiv = document.getElementById("connect4-button-div");
     buttonDiv.removeAttribute("hidden");
+}
+
+function setGameOverButton() {
+    let buttonDiv = document.getElementById("connect4-button-div");
+    buttonDiv.innerHTML = "";
+    // create game over button
+    var button = document.createElement("button");
+    button.id = "connect4-button";
+    button.textContent = "Start New Game";
+    button.classList.add("decor-button", "button-shadow");
+    button.style.cursor = "pointer";
+
+    button.addEventListener("click", function() {
+        window.location.href = "/new_game";
+    });
+
+    buttonDiv.appendChild(button);
 }
