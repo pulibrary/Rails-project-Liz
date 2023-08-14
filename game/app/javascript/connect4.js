@@ -11,10 +11,75 @@ let currColumns = []; //keeps track of which row each column is at.
 
 let usernameRedPlayer;
 let usernameYellowPlayer;
+let rounds = 0
+let totalRounds = 0
 
-window.onload = async function() {
-    await loginPlayers();
-    setGame(usernameRedPlayer, usernameYellowPlayer);
+window.onload = function() {
+    setGame();
+    // document.body.offsetHeight;
+    createNextRoundButton();
+    totalRounds = setTimeout(getNumberRounds, 100);
+    setTimeout(loginPlayers, 105);
+}
+
+function setGame() {
+    board = [];
+    // row height of 0 to 5 indexed for each column. We start at 5, the bottom.
+    currColumns = [5, 5, 5, 5, 5, 5, 5];
+
+    // Clear out (any) existing board for next round
+    const boardElement = document.getElementById("board");
+    boardElement.innerHTML = '';
+
+    for (let r = 0; r < rows; r++) {
+        let row = [];
+        for (let c = 0; c < columns; c++) {
+            // JS; ' ' is a placeholder for "R" and "Y" in the board. 
+            // ' ' means it has not been set to a color.
+            row.push(' ');
+            // HTML
+            let tile = document.createElement("div");
+            tile.id = r.toString() + "-" + c.toString();
+            tile.classList.add("tile");
+            tile.addEventListener("click", setPiece);
+            document.getElementById("board").append(tile);
+        }
+        board.push(row);
+    }
+}
+
+// this function is supposed to run ONCE
+function createNextRoundButton() {
+    // create "Next Round" button
+    let buttonDiv = document.getElementById("connect4-button-div");
+    buttonDiv.setAttribute("hidden", "");
+
+    var button = document.createElement("button");
+    button.id = "connect4-button";
+    button.textContent = "Next Round";
+    button.classList.add("decor-button", "button-shadow");
+    button.style.cursor = "pointer";
+
+    button.addEventListener("click", function(event) {
+        // Prevent the default link behavior (don't want to navigate anywhere)
+        event.preventDefault();
+
+        setGame();
+    });
+
+    buttonDiv.appendChild(button);
+}
+
+function getNumberRounds() {
+    let total = 0
+    do {
+        const userInput = prompt("Enter INTEGER number of rounds desired to play, between 1 and 10:")
+        // parse int with base 10
+        total = parseInt(userInput, 10);
+        console.log(`Test: totalRounds = ${total}`)
+    } while (!Number.isInteger(total) || !(1 <= total && total <= 10));
+    console.log("outside of while in getNumberRounds")
+    return total
 }
 
 async function loginPlayers() {
@@ -35,15 +100,10 @@ async function loginPlayers() {
 
 async function getPlayerUsername(color) {
     let username;
-    let notValid = true;
-        while (notValid) {
-            username = prompt(`Please enter your username to play as the ${color} player:`);
-            //By utilizing async/await, the function returns a Promise that resolves to either true or false
-            if (await checkUsernameValidity(username)) {
-                console.log("Test: inside 1st while loop")
-                notValid = false;
-            }
-        }
+    do {
+        username = prompt(`Please enter your username to play as the ${color} player:`);
+    } while(!(await checkUsernameValidity(username)));
+
         console.log("Test: after while loops")
         console.log("Test: user = " + username)
     return username
@@ -93,28 +153,6 @@ async function checkUsernameValidity(username) {
         console.error("Error:", error);
         // Depending on how you want to handle errors, you might return false, true, or throw the error again.
         throw new Error(error);
-    }
-}
-
-function setGame() {
-    board = [];
-    // row height of 0 to 5 indexed for each column. We start at 5, the bottom.
-    currColumns = [5, 5, 5, 5, 5, 5, 5];
-
-    for (let r = 0; r < rows; r++) {
-        let row = [];
-        for (let c = 0; c < columns; c++) {
-            // JS; ' ' is a placeholder for "R" and "Y" in the board. 
-            // ' ' means it has not been set to a color.
-            row.push(' ');
-            // HTML
-            let tile = document.createElement("div");
-            tile.id = r.toString() + "-" + c.toString();
-            tile.classList.add("tile");
-            tile.addEventListener("click", setPiece);
-            document.getElementById("board").append(tile);
-        }
-        board.push(row);
     }
 }
 
@@ -203,6 +241,7 @@ function checkWinner() {
 }
 
 function setWinner(r, c) {
+    rounds += 1
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
         winner.innerText = `${usernameRedPlayer} Wins!`;   
@@ -213,5 +252,12 @@ function setWinner(r, c) {
     }
     // set score for winner.
 
-    gameOver = true;
+    if (rounds == totalRounds) {
+        gameOver = true;
+        // show button to start new game => reload of page
+    }
+
+    // show button to begin next round
+    let buttonDiv = document.getElementById("connect4-button-div");
+    buttonDiv.removeAttribute("hidden");
 }

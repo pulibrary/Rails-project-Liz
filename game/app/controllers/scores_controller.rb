@@ -13,9 +13,13 @@ class ScoresController < ApplicationController
         end
     end
 
-    def setScore
+    def begin_round
         
     end
+
+    # def setScore
+        
+    # end
    
     private 
 

@@ -49,6 +49,8 @@ a {
   font-size: 1.5rem;
 }
 
+/* Flash messages styling */
+
 .flash-notice {
     color: #154114;
     font-weight: bold;
@@ -76,6 +78,7 @@ a {
   border-radius: 20%;
 }
 
+/* Button styling */
 
 .decor-button {
   background-color: rgb(144, 54, 234);

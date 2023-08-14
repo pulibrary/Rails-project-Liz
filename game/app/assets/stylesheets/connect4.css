@@ -4,14 +4,16 @@
     justify-content: center; 
 }
 
+/* this is the square board, the flex container */
 #board {
     height: 540px;
     width: 630px;
     background-color: blue;
     border: 10px solid navy;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+    margin: 0 auto 10% auto;
+    display: flex; 
+    /* wrap round tiles (children of flex container) inside square div */
+    flex-wrap: wrap; 
 }
 
 .tile {
@@ -19,7 +21,7 @@
     width: 70px;
     margin: 5px;
 
-    /* Circle */
+    /* Circular tiles styling */
     background-color: white;
     border-radius: 50%;
     border: 5px solid navy;
@@ -43,4 +45,13 @@
 
 .winner-yellow, #yellow-player {
     color: rgb(112, 112, 4);
+}
+
+#connect4-button-div {
+    text-align: center;
+    padding-bottom: 2%;
+}
+
+#connect4-button:hover {
+    text-shadow: 2px 2px 4px lightblue;
 }
