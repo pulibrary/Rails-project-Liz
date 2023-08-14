@@ -279,7 +279,11 @@ function setWinner(r, c) {
 
     if (rounds == totalRounds) {
         gameOver = true;
+        winner.className = "game-over"
+        winner.innerText = "Game Over!"
         // show button to start new game => reload of page
+        
+        
     }
 
     // show button to begin next round

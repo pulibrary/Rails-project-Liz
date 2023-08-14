@@ -55,3 +55,9 @@
 #connect4-button:hover {
     text-shadow: 2px 2px 4px lightblue;
 }
+
+.game-over {
+    color: blue;
+    /* x-offset, y-offset, blur, color (tip: use devtools to change it dynamically; much easier! */
+    text-shadow: -1px 4px 9px #0000008a;
+}
