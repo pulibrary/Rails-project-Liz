@@ -18,10 +18,25 @@ let totalRounds = 0;
 
 window.onload = function() {
     setGame();
-    // document.body.offsetHeight;
     createNextRoundButton();
-    totalRounds = setTimeout(getNumberRounds, 100);
-    setTimeout(loginPlayers, 105);
+    // timeout allows setGame CSS styling to render properly before pop up dialogs
+    setTimeout(async () => {
+        totalRounds = getNumberRounds();
+        await loginPlayers();
+        setTurn();
+    }, 100);
+}
+
+function setTurn() {
+    // indicate whose turn it is; I am reusing the h2 level header that announces the winner of each round.
+    let turn = document.getElementById("winner");
+    if (currPlayer == "R") {
+        turn.innerText = `${usernameRedPlayer}'s turn to play!`;
+        winner.className = "winner-red"; 
+    } else {
+        turn.innerText = `${usernameYellowPlayer}'s turn to play!`;
+        winner.className = "winner-yellow"; 
+    }
 }
 
 function setGame() {
@@ -70,6 +85,7 @@ function createNextRoundButton() {
         winner.innerText = "";
         roundOver = false;
         setGame();
+        setTurn();
     });
 
     buttonDiv.appendChild(button);
@@ -194,6 +210,7 @@ function setPiece() {
     r -= 1; // update the row height for that column
     currColumns[c] = r; // update the array
 
+    setTurn();
     checkWinner();
 }
 
