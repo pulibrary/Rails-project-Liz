@@ -39,11 +39,16 @@
     text-align: center;
 }
 
-.winner-red, #red-player {
+.red-text {
     color: red;
 }
 
-.winner-yellow, #yellow-player {
+/* .scoreboard-container {
+    display: flex;
+    justify-content: space-between;
+} */
+
+.yellow-text {
     color: rgb(112, 112, 4);
 }
 

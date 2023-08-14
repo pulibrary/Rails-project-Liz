@@ -32,10 +32,10 @@ function setTurn() {
     let turn = document.getElementById("winner");
     if (currPlayer == "R") {
         turn.innerText = `${usernameRedPlayer}'s turn to play!`;
-        winner.className = "winner-red"; 
+        winner.className = "red-text"; 
     } else {
         turn.innerText = `${usernameYellowPlayer}'s turn to play!`;
-        winner.className = "winner-yellow"; 
+        winner.className = "yellow-text"; 
     }
 }
 
@@ -270,14 +270,18 @@ function setWinner(r, c) {
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
         winner.innerText = `${usernameRedPlayer} Wins!`;   
-        winner.className = "winner-red";          
+        winner.className = "red-text";
+        // update round score
+        let redRoundScore = document.getElementById("red-score");
+        updateScore(redRoundScore);
+
     } else {
         winner.innerText = `${usernameYellowPlayer} Wins!`;
-        winner.className = "winner-yellow";
+        winner.className = "yellow-text";
+        // update round score
+        let yellowRoundScore = document.getElementById("yellow-score");
+        updateScore(yellowRoundScore);
     }
-    // TODO: set score for winner.
-
-    
     if (rounds == totalRounds) {
         gameOver = true;
         winner.className = "game-over"
@@ -290,6 +294,12 @@ function setWinner(r, c) {
     // show button to begin next round
     let buttonDiv = document.getElementById("connect4-button-div");
     buttonDiv.removeAttribute("hidden");
+}
+
+function updateScore(element) { 
+    let scoreString = element.innerText;
+    let score = scoreString.charAt(scoreString.length - 1);
+    element.innerText = `Score: ${parseInt(score, 10) + 1}`;
 }
 
 function setGameOverButton() {
