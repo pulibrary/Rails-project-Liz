@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   # each unique user (i.e., one row per users.id), and the MAX(scores.score) 
   # function will give us the highest score for each user.
   def list_players
+    # Note: use instance variables with @ to make it available to view template
     @users = User.joins(
                           <<~SQL
                             LEFT JOIN (
