@@ -83,7 +83,8 @@ function createNextRoundButton() {
     button.textContent = "Next Round";
     button.classList.add("decor-button", "button-shadow");
     button.style.cursor = "pointer";
-
+    
+    // set event listener - we set up once.
     button.addEventListener("click", function(event) {
         if (gameOver) {
             return;
@@ -96,6 +97,9 @@ function createNextRoundButton() {
         setGame();
         setTurn();
         setRound();
+        // hide nextRound button
+        let buttonDiv = document.getElementById("connect4-button-div");
+        buttonDiv.setAttribute("hidden", "");
     });
 
     buttonDiv.appendChild(button);
