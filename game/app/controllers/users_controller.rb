@@ -76,10 +76,6 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id]) 
-    @data = User.joins(:scores) # due to association, "joins" matches id automatically.
-                .select("users.name, users.username, scores.score, scores.updated_at")
-                .where("user_id = #{@user.id}")
-                .order("scores.score DESC")
 
     if @user.destroy
       flash[:notice] = 'Deleted account successfully!'
