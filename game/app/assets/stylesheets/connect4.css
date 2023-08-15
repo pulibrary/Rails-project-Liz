@@ -1,3 +1,7 @@
+#connect4-heading {
+    margin-top: 1px;
+}
+
 .board-container {
     display: flex;
     /* centers along vertical main axis; horizontally. */
@@ -43,10 +47,17 @@
 #winner {
     text-align: center;
     margin-bottom: 2%;
+    margin-top: 0;
 }
 
 .red-text {
     color: red;
+    margin: 0;
+}
+
+
+.yellow-text {
+    color: rgb(112, 112, 4);
     margin: 0;
 }
 
@@ -56,14 +67,6 @@
     align-items: center;
 }
 
-#middle-div {
-    align-self: auto;
-}
-
-.yellow-text {
-    color: rgb(112, 112, 4);
-    margin: 0;
-}
 
 #connect4-button-div {
     text-align: center;

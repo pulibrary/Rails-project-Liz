@@ -2,7 +2,7 @@
   <%= javascript_import_module_tag "connect4" %>
 <% end %>
 
-<h1> Connect4 </h1>
+<h1 id="connect4-heading"> Connect4 </h1>
 
 <div class="scoreboard-container">
   <div>
@@ -16,11 +16,11 @@
   </div>
 </div>
 
-<div id="middle-div">
+<span id="middle-div">
     <h2 id="round-header">Round 0 <h2>
     <h2 id="winner"> </h2> <%# this is also used for indicating whose turn it is. %>
     <div id="connect4-button-div"> </div> 
-</div>
+</span>
 
 <div class="board-container"> 
     <div id="board"><div>

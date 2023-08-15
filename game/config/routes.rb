@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   get "validate_username", to: "scores#validate_username"
   get "/new_game", to: "scores#start_new_game"
 
+  
   post "/create_session", to: "sessions#create"
   post "/create_account", to: "users#create"
+  patch "/update", to: "scores#update"
+  # update (users) is done automatically upon using edit
  
   
   # This is another part of capturing the hierarchical relationship 

@@ -1,14 +1,14 @@
 // connect4 tutorial for initial implementation: https://youtu.be/4ARsthVnCTg 
-let playerRed = "R";
-let playerYellow = "Y";
+const playerRed = "R";
+const playerYellow = "Y";
 let currPlayer = playerRed;
 
 let gameOver = false;
 let roundOver = false;
 let board;
 
-let rows = 6;
-let columns = 7;
+const rows = 6;
+const columns = 7;
 let currColumns = []; //keeps track of which row each column is at.
 
 let usernameRedPlayer;
@@ -182,7 +182,6 @@ async function checkUsernameValidity(username) {
         }
     } catch (error) {
         console.error("Error:", error);
-        // Depending on how you want to handle errors, you might return false, true, or throw the error again.
         throw new Error(error);
     }
 }
@@ -291,13 +290,13 @@ function setWinner(r, c) {
         winner.innerText = `${usernameRedPlayer} Wins!`;   
         winner.className = "red-text";
         // update round score
-        updateScore(redScoreElement);
+        setScore(redScoreElement);
 
     } else {
         winner.innerText = `${usernameYellowPlayer} Wins!`;
         winner.className = "yellow-text";
         // update round score
-        updateScore(yellowScoreElement);
+        setScore(yellowScoreElement);
     }
 
     // Handle when game is over
@@ -307,13 +306,17 @@ function setWinner(r, c) {
         roundHeader.className = "game-over";
         roundHeader.innerText = "Game Over!";
 
-        // determine who is the FINAL WINNER of game (not round) after final score update.
+        // determine who is the FINAL WINNER of game (not the round) after final score update.
         if (getScore(redScoreElement) > getScore(yellowScoreElement)) {
             winner.innerText = `${usernameRedPlayer} is the final winner!`;
             winner.className = "red-text";
+            // pass username to set cumulative score of winner
+            updateScore(usernameRedPlayer)
+
         } else {
             winner.innerText = `${usernameYellowPlayer} is the final winner!`;
             winner.className = "yellow-text";
+            updateScore(usernameYellowPlayer)
         } 
 
         // show button to start new game => reload of page
@@ -325,7 +328,29 @@ function setWinner(r, c) {
     buttonDiv.removeAttribute("hidden");
 }
 
-function updateScore(element) { 
+// cumulative score of winner-player for today
+async function updateScore(username) {
+    console.log(`username in updateScore = ${username}`)
+    let response;
+    try {
+        response = await fetch("/update?username=" + encodeURIComponent(username), {
+            method: "PATCH",
+            headers: {
+                "X-CSRF-Token": getMetaContent('csrf-token')
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    } catch (error) {
+        console.error("Server response", response.textContent);
+        throw new Error(error);
+    }
+}
+
+// score of round
+function setScore(element) { 
     let score = getScore(element);
     element.innerText = `Score: ${parseInt(score, 10) + 1}`;
 }

@@ -4,15 +4,23 @@
     - [x] Clears out “winner”
     - [x] Instruct whose color player turn it is
     - [x] Update players’ color
-    - [ ] Change date time to only date in schema
+    - [x] Change date time to only date in schema
     - [x] Indicate when the game is over
     - [x] Indicate what round players are at
         - [x]  show final scores and FINAL WINNER!
     - [x] Display score of current round for each player
-        - [ ] Update score where day = now() by 1 once player wins game (each point is a win against a player per GAME)
+        - [ ] Update score where day = now() by 1 once player wins game (each point of score is a win against a player per GAME in a day)
 - [x] Once game is over, include restart game button => page redirect
+
+- [] Fix button alignment for login
+- [] Fix delete feature that is no longer working (I edited something)
+
 - [ ] Create accessibility tests for connect 4
 - [ ] feature tests ... 
 - [ ] Model tests ... 
+- [] Jest - javascript testing 
+
 - [ ] Include rubocop in circleci!
+- [] clean up console.log and prints
+
 - [ ] Include ticket for feedback

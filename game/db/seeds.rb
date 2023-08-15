@@ -31,10 +31,11 @@ users_data = [
 
 # Create users and scores
 users_data.each do |user_data|
+  #  create! will raise an ActiveRecord::RecordInvalid exception if the object is invalid. 
   user = User.create!(user_data)
 
   10.times do 
-    Score.create!(score: rand(0..150), user_id: user.id)
+    Score.create!(score: rand(0..150), user_id: user.id, updated_at: "2023-01-01")
   end
 
   Score.create!(score: 100, user_id: user.id, updated_at: "2022-02-12")
