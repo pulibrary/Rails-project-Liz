@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# To reset test database, run: bin/rails db:test:prepare   
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
