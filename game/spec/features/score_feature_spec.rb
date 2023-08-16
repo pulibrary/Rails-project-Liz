@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature 'User feature testing', type: :feature, js: true do
+RSpec.feature 'Score feature testing', type: :feature, js: true do
     it 'accesses scoreboard' do
         score_and_user = FactoryBot.create(:score)
         visit root_path

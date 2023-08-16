@@ -33,7 +33,7 @@ RSpec.feature "User feature testing", type: :feature, js: true do
         fill_in "Name", with: "New user"
         
         fill_in "Username", with: ""
-        fill_in "Username", with: "New username"
+        fill_in "Username", with: "username"
 
         fill_in "Password", with: "0"
         click_button "Submit"
@@ -70,6 +70,6 @@ RSpec.feature "User feature testing", type: :feature, js: true do
 
         click_on "Back"
 
-        expect(page).to have_text("Welcome to Liz\"s Connect4 Game!")
+        expect(page).to have_text("Welcome to Liz\'s Connect4 Game!")
     end
 end
