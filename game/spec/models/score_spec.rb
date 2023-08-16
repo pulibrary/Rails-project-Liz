@@ -2,26 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  context 'Validation tests' do
-    it 'ensures name presence' do
-      user = User.create(username: 'pedro111', password: 'xakjs354').valid?
-      expect(user).to eq(false)
+RSpec.describe Score, type: :model do
+  context 'model validation tests' do
+    user = FactoryBot.create(:user)
+
+    it 'ensures user_id presence' do
+      score = Score.create(score: 100).valid?
+      expect(score).to eq(false)
     end
 
-    it 'ensures username presence' do
-      user = User.create(name: 'Pedro', password: 'xakjs354').valid?
-      expect(user).to eq(false)
-    end
-
-    it 'ensures password presence' do
-      user = User.create(name: 'Pedro', username: 'pedro111').valid?
-      expect(user).to eq(false)
+    it 'ensures score presence' do
+      score = Score.create(user_id: user.id).valid?
+      expect(score).to eq(false)
     end
 
     it 'should save successfully' do
-      user = User.create(name: 'Pedro', username: 'pedro111', password: 'xakjs354').valid?
-      expect(user).to eq(true)
+      expect(user.save).to eq(true), user.errors.full_messages.to_sentence
+      score = Score.create(score: 100, user_id: user.id).valid?
+      expect(score).to eq(true)
     end
   end
 end

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context 'Validation tests' do
+  context 'model validation tests' do
     it 'ensures name presence' do
       user = User.create(username: 'pedro111', password: 'xakjs354').valid?
       expect(user).to eq(false)
