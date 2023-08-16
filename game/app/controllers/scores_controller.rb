@@ -1,14 +1,14 @@
 class ScoresController < ApplicationController
     
     def show_game
-        render "connect4"
+        render "/scores/connect4"
     end
 
     def setup_game
         @isRoundsValid = true
         @isUsername1Valid = true
         @isUsername2Valid = true
-        render "setup_game"
+        render :setup_game
     end
 
     # for post requests, must "redirect" if going to a "different" page
@@ -28,7 +28,7 @@ class ScoresController < ApplicationController
             redirect_to show_game_path(rounds: @rounds, usernameRedPlayer: @usernameRedPlayer, usernameYellowPlayer: @usernameYellowPlayer), turbolinks: "reload"
         else
             # 422 Unprocessable Entity: request was understood but contains invalid data.
-            render "setup_game", status: :unprocessable_entity
+            render :setup_game, status: :unprocessable_entity
         end
     end
 

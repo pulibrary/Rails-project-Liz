@@ -27,13 +27,13 @@ class UsersController < ApplicationController
                  .select('users.name, users.username, scores.score as highest_score, scores.updated_at as date')
                  .order('highest_score DESC, scores.updated_at DESC')
                  .limit(10)
-    render "users/scoreboard"
+    render "/users/scoreboard"
   end
 
   # Render the app/users/create_account.html.erb view.
   def create_account 
     @user = User.new
-    render "users/create_account"
+    render "/users/create_account"
   end
 
   def create
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
                   .where("user_id = #{@user.id}")
                   .order("scores.score DESC, date DESC")
 
-    render "users/profile" # ->  has access to instance variables in controller
+    render "/users/profile" # ->  has access to instance variables in controller
   end
 
   def edit 
