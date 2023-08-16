@@ -7,5 +7,10 @@ FactoryBot.define do
     sequence(:username) { "user#{rand(10000)}" }
     password { 'xakjs354' }
   end
+
+  factory :score do
+    score {86400}
+    association :user
+  end
 end
 

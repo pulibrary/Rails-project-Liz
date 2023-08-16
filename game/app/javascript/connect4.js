@@ -205,12 +205,6 @@ function checkWinner() {
     }
 }
 
-function getScore(element) {
-    let scoreString = element.innerText;
-    let score = parseInt(scoreString.charAt(scoreString.length - 1), 10);
-    return score
-}
-
 function setWinner(r, c) {
     console.log("Inside setWinner!")
     roundOver = true;
@@ -295,6 +289,12 @@ async function updateScore(username) {
 function setScore(element) { 
     let score = getScore(element);
     element.innerText = `Score: ${parseInt(score, 10) + 1}`;
+}
+
+function getScore(element) {
+    let scoreString = element.innerText;
+    let score = parseInt(scoreString.charAt(scoreString.length - 1), 10);
+    return score
 }
 
 function createNewGameButton() {

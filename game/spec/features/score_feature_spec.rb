@@ -1,75 +1,44 @@
 require "rails_helper"
 
 RSpec.feature 'User feature testing', type: :feature, js: true do
-    it 'creates new account' do
+    it 'accesses scoreboard' do
+        score_and_user = FactoryBot.create(:score)
         visit root_path
-        click_on 'create an account'
+        click_on 'Scoreboard'
 
-        fill_in 'Name', with: 'Maria'
-        fill_in 'Username', with: 'maria'
-        fill_in 'Password', with: '123'
-        click_button 'Submit'
-        
-        expect(page).to have_text('Created account successfully!') 
-    end
- 
-    it 'accesses profile and edits account info' do
-        user = FactoryBot.create(:user)
-        visit root_path
-        click_on 'Profile'
-
-        fill_in 'Username', with: user.username
-        fill_in 'Password', with: user.password
-        click_button 'Login'
-
-        expect(page).to have_text('Login successful!') 
-
-        click_on 'Edit'
-
-        expect(page).to have_current_path("/users/#{user.id}/edit")
-        
-        # fill_in('Name', with: 'New User', fill_options: { clear: :backspace })
-        fill_in 'Name', with: ''
-        fill_in 'Name', with: 'New user'
-        
-        fill_in 'Username', with: ''
-        fill_in 'Username', with: 'New username'
-
-        fill_in 'Password', with: '0'
-        click_button 'Submit'
-        
-        expect(page).to have_text('Updated account information successfully!') 
+        expect(page).to have_text("Scoreboard")
+        expect(page).to have_text(score_and_user.user.name)
+        expect(page).to have_text(score_and_user.user.username)
+        expect(page).to have_text(score_and_user.score)
+        click_on 'Back'
+        expect(page).to have_text('Welcome to Liz\'s Connect4 Game!')
     end
 
-    it 'accesses profile and deletes account' do
-        user = FactoryBot.create(:user)
+    it 'accesses connect4 game' do
+        bot1 = FactoryBot.create(:score)
+        bot2 = FactoryBot.create(:score)
         visit root_path
-        click_on 'Profile'
 
-        fill_in 'Username', with: user.username
-        fill_in 'Password', with: user.password
-        click_button 'Login'
+        new_window = window_opened_by { click_on 'Connect4' }
 
-        expect(page).to have_text('Login successful!') 
+        within_window new_window do
+            expect(page).to have_text("To access game, please fill out the following:")
         
-        accept_confirm do
-            click_on 'Delete'
+            fill_in :rounds, with: (rand(1..6) * 2) - 1
+            fill_in :username1, with: bot1.user.username
+            fill_in :username2, with: bot2.user.username
+            click_button "Submit"
+
+            expect(page).to have_text("Connect4")
+            expect(page).to have_text("Red Player: #{bot1.user.username}")
+            expect(page).to have_text("Yellow Player: #{bot2.user.username}")
+            expect(page).to have_text("#{bot1.user.username}'s Score: 0")
+            expect(page).to have_text("#{bot2.user.username}'s Score: 0")
+            expect(page).to have_text("Round")
+            expect(page).to have_text("turn to play!")
         end
 
-        expect(page).to have_text('Deleted account successfully!')
-    end
-
-
-    it 'accesses list of players' do
-        user = FactoryBot.create(:user)
-        visit root_path
-        click_on 'list of all players'
-
-        expect(page).to have_text(user.name)
-        expect(page).to have_text(user.username)
-
-        click_on 'Back'
-
-        expect(page).to have_text('Welcome to Liz\'s Connect4 Game!')
+        # test playing the game and getting the correct buttons dynamically
+        # for next round and starting new game.
     end
 end

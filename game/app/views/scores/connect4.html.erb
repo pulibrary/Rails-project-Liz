@@ -7,12 +7,12 @@
   <main> <div class="scoreboard-container">
     <div>
       <h3 class="red-text"> Red Player: <span id="red-player"> <%= params[:usernameRedPlayer]%> </span></h3>
-      <h3 id="red-score" class="red-text"> Score: 0 </h3>
+      <h3 class="red-text"><%= params[:usernameRedPlayer]%>'s <span id="red-score">Score: 0 </h3>
     </div>
 
     <div>
       <h3 class="yellow-text"> Yellow Player: <span id="yellow-player"><%= params[:usernameYellowPlayer] %> </span> </h3>
-      <h3 id="yellow-score" class="yellow-text"> Score: 0 </h3>
+      <h3 class="yellow-text"> <%= params[:usernameYellowPlayer]%>'s <span id="yellow-score">Score: 0 </span> </h3>
     </div>
   </div>
 
