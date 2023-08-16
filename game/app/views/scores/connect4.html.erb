@@ -6,18 +6,19 @@
 
   <main> <div class="scoreboard-container">
     <div>
-      <h3 id="red-player" class="red-text"> Red Player: </h3>
+      <h3 class="red-text"> Red Player: <span id="red-player"> <%= params[:usernameRedPlayer]%> </span></h3>
       <h3 id="red-score" class="red-text"> Score: 0 </h3>
     </div>
 
     <div>
-      <h3 id="yellow-player" class="yellow-text"> Yellow Player: </h3>
+      <h3 class="yellow-text"> Yellow Player: <span id="yellow-player"><%= params[:usernameYellowPlayer] %> </span> </h3>
       <h3 id="yellow-score" class="yellow-text"> Score: 0 </h3>
     </div>
   </div>
 
   <div class="middle-div">
-      <h2 id="round-header">Round 0 </h2>
+      <div id="number-of-rounds" data-rounds="<%= params[:rounds] %>"></div>
+      <h2 id="round-header"> Welcome! </h2>
       <h2 id="winner"> </h2> <%# this is also used for indicating whose turn it is. %>
       <span id="connect4-button-div"> </span> 
   </div>

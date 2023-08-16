@@ -1,0 +1,41 @@
+<h1> To access game, please fill out the following: </h1>
+
+<main> 
+    <div class="form-content">
+        <%= form_with url: access_game_path do |form| %>
+            <div>
+                <%= form.label :rounds, "Rounds (odd integer between 1 and 11)" %><br>
+                <%= form.text_field :rounds, required: true %>
+                <% if @isRoundsValid == false %>
+                    <div> <p class="invalid-input"> Invalid number of rounds <p> </div>
+                 <% end %>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <%= form.label :username1, "Username for RED player" %><br>
+                <%= form.text_field :username1, required: true %>
+                <% if @isUsername1Valid == false %>
+                    <div> <p class="invalid-input"> This username does not exist <p> </div>
+                <% end %>
+            </div>
+
+            <br> <br>
+
+            <div>
+            <%= form.label :username2, "Username for YELLOW player" %><br>
+            <%= form.text_field :username2, required: true %>
+                <% if @isUsername2Valid == false %>
+                    <div> <p class="invalid-input"> This username does not exist <p> </div>
+                <% end %>
+            </div>
+
+            <br> <br>
+
+            <div class="form-submit-button">
+                <%= form.submit "Submit" %>
+            </div>
+        <% end %>
+    </div> 
+</main>

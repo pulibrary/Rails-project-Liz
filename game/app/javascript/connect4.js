@@ -1,4 +1,5 @@
 // connect4 tutorial for initial implementation: https://youtu.be/4ARsthVnCTg 
+
 const playerRed = "R";
 const playerYellow = "Y";
 let currPlayer = playerRed;
@@ -11,21 +12,30 @@ const rows = 6;
 const columns = 7;
 let currColumns = []; //keeps track of which row each column is at.
 
-let usernameRedPlayer;
-let usernameYellowPlayer;
+let usernameRedPlayer = document.getElementById("red-player").innerText
+console.log(`red player = ${usernameRedPlayer}`)
+let usernameYellowPlayer = document.getElementById("yellow-player").innerText;
+console.log(`Yellow player = ${usernameYellowPlayer}`)
 let rounds = 1;
-let totalRounds = 0;
+let totalRounds = parseInt(document.getElementById("number-of-rounds").getAttribute("data-rounds"), 10);
+console.log(`totalRounds = ${totalRounds}`);
 
-window.onload = function() {
+if (window.location.pathname.startsWith("/show_game")) {
+    console.log("start of onload");
     setGame();
+    console.log("set game");
     createNextRoundButton();
-    // timeout allows setGame CSS styling to render properly before pop up dialogs
-    setTimeout(async () => {
-        totalRounds = getNumberRounds();
-        await loginPlayers();
-        setTurn();
-        setRound();
-    }, 100);
+    createNewGameButton();
+    setTurn();
+    setRound();
+
+    // // timeout allows setGame CSS styling to render properly before pop up dialogs
+    // setTimeout(async () => {
+    //     totalRounds = getNumberRounds();
+    //     await loginPlayers();
+    //     setTurn();
+    //     setRound();
+    // }, 100);
 }
 
 function setTurn() {
@@ -76,10 +86,10 @@ function setGame() {
 function createNextRoundButton() {
     // create "Next Round" button
     let buttonDiv = document.getElementById("connect4-button-div");
-    buttonDiv.setAttribute("hidden", "");
 
     var button = document.createElement("button");
-    button.id = "connect4-button";
+    button.setAttribute("hidden", "");
+    button.id = "next-round-button";
     button.textContent = "Next Round";
     button.classList.add("decor-button", "button-shadow");
     button.style.cursor = "pointer";
@@ -98,51 +108,50 @@ function createNextRoundButton() {
         setTurn();
         setRound();
         // hide nextRound button
-        let buttonDiv = document.getElementById("connect4-button-div");
-        buttonDiv.setAttribute("hidden", "");
+        this.setAttribute("hidden", "");
     });
 
     buttonDiv.appendChild(button);
 }
 
-function getNumberRounds() {
-    let total = 0;
-    do {
-        const userInput = prompt("Enter an ODD INTEGER for number of rounds desired to play, between 1 and 11:")
-        // parse int with base 10
-        total = parseInt(userInput, 10);
-        console.log(`Test: totalRounds = ${total}`)
-    } while (!Number.isInteger(total) || !(1 <= total && total <= 10) || total % 2 == 0);
-    console.log("outside of while in getNumberRounds");
-    return total;
-}
+// function getNumberRounds() {
+//     let total = 0;
+//     do {
+//         const userInput = prompt("Enter an odd integer for number of rounds desired to play, between 1 and 11:")
+//         // parse int with base 10
+//         total = parseInt(userInput, 10);
+//         console.log(`Test: totalRounds = ${total}`)
+//     } while (!Number.isInteger(total) || !(1 <= total && total <= 10) || total % 2 == 0);
+//     console.log("outside of while in getNumberRounds");
+//     return total;
+// }
 
-async function loginPlayers() {
-    let redPlayer = document.getElementById("red-player");
-    let yellowPlayer = document.getElementById("yellow-player");
+// async function loginPlayers() {
+//     let redPlayer = document.getElementById("red-player");
+//     let yellowPlayer = document.getElementById("yellow-player");
     
-    try {
-        usernameRedPlayer = await getPlayerUsername('RED');
-        redPlayer.innerText = `Red Player: ${usernameRedPlayer}`;
-        usernameYellowPlayer = await getPlayerUsername('YELLOW');
-        yellowPlayer.innerText = `Yellow Player: ${usernameYellowPlayer}`;
+//     try {
+//         usernameRedPlayer = await getPlayerUsername('RED');
+//         redPlayer.innerText = `Red Player: ${usernameRedPlayer}`;
+//         usernameYellowPlayer = await getPlayerUsername('YELLOW');
+//         yellowPlayer.innerText = `Yellow Player: ${usernameYellowPlayer}`;
         
-    } catch (error) {
-        console.error("Error:", error);
-        throw new Error(error);
-    }
-}
+//     } catch (error) {
+//         console.error("Error:", error);
+//         throw new Error(error);
+//     }
+// }
 
-async function getPlayerUsername(color) {
-    let username;
-    do {
-        username = prompt(`Please enter your username to play as the ${color} player:`);
-    } while(!(await checkUsernameValidity(username)));
+// async function getPlayerUsername(color) {
+//     let username;
+//     do {
+//         username = prompt(`Please enter your username to play as the ${color} player:`);
+//     } while(!(await checkUsernameValidity(username)));
 
-        console.log("Test: after while loops");
-        console.log("Test: user = " + username);
-    return username;
-}
+//         console.log("Test: after while loops");
+//         console.log("Test: user = " + username);
+//     return username;
+// }
 
 // this function is used to get the CSRF token from the meta tags that Rails automatically
 // inserts into the page when you use <%= csrf_meta_tags %>. 
@@ -156,39 +165,39 @@ function getMetaContent(metaName) {
     return document.querySelector("meta[name='" + metaName + "']").getAttribute("content");
   }
 
-async function checkUsernameValidity(username) {
-    try {
-        // The encoding ensures that characters, which might be interpreted 
-        // as control characters in the URL, are safely transmitted.
-        // When the encoded URL reaches the Rails server, Rails automatically
-        // decodes the parameters for you. So, by the time you access params[:username],
-        // the value is already decoded, and you get the original username string that 
-        // you can use to look up in your database.
-        const response = await fetch("/validate_username?username=" + encodeURIComponent(username), {
-            method: "GET",
-            headers: {
-                "X-CSRF-Token": getMetaContent('csrf-token')
-            }
-        });
+// async function checkUsernameValidity(username) {
+//     try {
+//         // The encoding ensures that characters, which might be interpreted 
+//         // as control characters in the URL, are safely transmitted.
+//         // When the encoded URL reaches the Rails server, Rails automatically
+//         // decodes the parameters for you. So, by the time you access params[:username],
+//         // the value is already decoded, and you get the original username string that 
+//         // you can use to look up in your database.
+//         const response = await fetch("/validate_username?username=" + encodeURIComponent(username), {
+//             method: "GET",
+//             headers: {
+//                 "X-CSRF-Token": getMetaContent('csrf-token')
+//             }
+//         });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
 
-        const data = await response.json();
+//         const data = await response.json();
         
-        if (data.valid) {
-            console.log(data.message);  // username exists
-            return true;
-        } else {
-            console.log(data.message);  // username does not exist
-            return false;
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        throw new Error(error);
-    }
-}
+//         if (data.valid) {
+//             console.log(data.message);  // username exists
+//             return true;
+//         } else {
+//             console.log(data.message);  // username does not exist
+//             return false;
+//         }
+//     } catch (error) {
+//         console.error("Error:", error);
+//         throw new Error(error);
+//     }
+// }
 
 function setPiece() {
     console.log("Setting piece!")
@@ -284,8 +293,10 @@ function getScore(element) {
 }
 
 function setWinner(r, c) {
+    console.log("Inside setWinner!")
     roundOver = true;
     rounds += 1;
+    console.log(`rounds = ${rounds}`)
     let redScoreElement = document.getElementById("red-score");
     let yellowScoreElement = document.getElementById("yellow-score");
     let winner = document.getElementById("winner");
@@ -303,8 +314,12 @@ function setWinner(r, c) {
         setScore(yellowScoreElement);
     }
 
+    console.log(`rounds again = ${rounds}`)
+    console.log(`totalRounds = ${totalRounds + 1}`)
+    console.log(rounds == (totalRounds + 1))
     // Handle when game is over
     if (rounds == totalRounds + 1) { // + 1 to indicate we would be at 4th round, meaning we finished 3 rounds.
+        console.log("game is over!")
         gameOver = true;
         let roundHeader = document.getElementById("round-header");
         roundHeader.className = "game-over";
@@ -324,12 +339,16 @@ function setWinner(r, c) {
         } 
 
         // show button to start new game => reload of page
-        startNewGame();
+        console.log("Setting start new game button")
+        var button = document.getElementById("start-new-game-button");
+        button.removeAttribute("hidden");
     }
 
-    // show button to begin next round
-    let buttonDiv = document.getElementById("connect4-button-div");
-    buttonDiv.removeAttribute("hidden");
+    if (!gameOver) {
+        // show button to begin next round
+        var button = document.getElementById("next-round-button");
+        button.removeAttribute("hidden");
+    }
 }
 
 // cumulative score of winner-player for today
@@ -348,7 +367,7 @@ async function updateScore(username) {
             throw new Error('Network response was not ok');
         }
     } catch (error) {
-        console.error("Server response", response.textContent);
+        console.error("Server error: ", response.textContent);
         throw new Error(error);
     }
 }
@@ -359,18 +378,19 @@ function setScore(element) {
     element.innerText = `Score: ${parseInt(score, 10) + 1}`;
 }
 
-function startNewGame() {
+function createNewGameButton() {
     let buttonDiv = document.getElementById("connect4-button-div");
-    buttonDiv.innerHTML = "";
     // create game over button
     var button = document.createElement("button");
-    button.id = "connect4-button";
+    button.setAttribute("hidden", "");
+    button.id = "start-new-game-button";
     button.textContent = "Start New Game";
     button.classList.add("decor-button", "button-shadow");
     button.style.cursor = "pointer";
 
     button.addEventListener("click", function() {
-        window.location.href = "/new_game";
+        window.location.href = "/setup_game";
+        this.setAttribute("hidden", "")
     });
 
     buttonDiv.appendChild(button);

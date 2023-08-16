@@ -5,14 +5,16 @@ Rails.application.routes.draw do
   get "/access_profile", to: "users#access_profile"
   get "/authenticate", to: "sessions#new"
   get "/list_players", to: "users#list_players"
-  get "/connect4", to: "scores#access_game"
   get "validate_username", to: "scores#validate_username"
-  get "/new_game", to: "scores#start_new_game"
+  get "setup_game", to: "scores#setup_game"
+  get "access_game", to: "scores#access_game"
+  get "show_game", to: "scores#show_game"
+  # get "/new_game", to: "scores#start_new_game"
 
-  
   post "/create_session", to: "sessions#create"
   post "/create_account", to: "users#create"
   patch "/update", to: "scores#update"
+  post "/access_game", to: "scores#access_game"
   # update (users) is done automatically upon using edit
  
   

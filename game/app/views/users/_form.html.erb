@@ -5,7 +5,7 @@ It knows we are updating because we call edit path beforehand. %>
 <main> <div class="form-content">
   <%= form_with model: user do |form| %>
       <div>
-          <%= form.label :name %><br>
+          <%= form.label :name %> <br>
           <%= form.text_field :name %>
           <% user.errors.full_messages_for(:name).each do |message| %>
               <div> <%= message %> </div>
