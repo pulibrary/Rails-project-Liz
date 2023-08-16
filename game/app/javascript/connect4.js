@@ -28,14 +28,6 @@ if (window.location.pathname.startsWith("/show_game")) {
     createNewGameButton();
     setTurn();
     setRound();
-
-    // // timeout allows setGame CSS styling to render properly before pop up dialogs
-    // setTimeout(async () => {
-    //     totalRounds = getNumberRounds();
-    //     await loginPlayers();
-    //     setTurn();
-    //     setRound();
-    // }, 100);
 }
 
 function setTurn() {
@@ -114,45 +106,6 @@ function createNextRoundButton() {
     buttonDiv.appendChild(button);
 }
 
-// function getNumberRounds() {
-//     let total = 0;
-//     do {
-//         const userInput = prompt("Enter an odd integer for number of rounds desired to play, between 1 and 11:")
-//         // parse int with base 10
-//         total = parseInt(userInput, 10);
-//         console.log(`Test: totalRounds = ${total}`)
-//     } while (!Number.isInteger(total) || !(1 <= total && total <= 10) || total % 2 == 0);
-//     console.log("outside of while in getNumberRounds");
-//     return total;
-// }
-
-// async function loginPlayers() {
-//     let redPlayer = document.getElementById("red-player");
-//     let yellowPlayer = document.getElementById("yellow-player");
-    
-//     try {
-//         usernameRedPlayer = await getPlayerUsername('RED');
-//         redPlayer.innerText = `Red Player: ${usernameRedPlayer}`;
-//         usernameYellowPlayer = await getPlayerUsername('YELLOW');
-//         yellowPlayer.innerText = `Yellow Player: ${usernameYellowPlayer}`;
-        
-//     } catch (error) {
-//         console.error("Error:", error);
-//         throw new Error(error);
-//     }
-// }
-
-// async function getPlayerUsername(color) {
-//     let username;
-//     do {
-//         username = prompt(`Please enter your username to play as the ${color} player:`);
-//     } while(!(await checkUsernameValidity(username)));
-
-//         console.log("Test: after while loops");
-//         console.log("Test: user = " + username);
-//     return username;
-// }
-
 // this function is used to get the CSRF token from the meta tags that Rails automatically
 // inserts into the page when you use <%= csrf_meta_tags %>. 
 // IMPORTANT: For every user session, a token is generated.
@@ -164,40 +117,6 @@ function createNextRoundButton() {
 function getMetaContent(metaName) {
     return document.querySelector("meta[name='" + metaName + "']").getAttribute("content");
   }
-
-// async function checkUsernameValidity(username) {
-//     try {
-//         // The encoding ensures that characters, which might be interpreted 
-//         // as control characters in the URL, are safely transmitted.
-//         // When the encoded URL reaches the Rails server, Rails automatically
-//         // decodes the parameters for you. So, by the time you access params[:username],
-//         // the value is already decoded, and you get the original username string that 
-//         // you can use to look up in your database.
-//         const response = await fetch("/validate_username?username=" + encodeURIComponent(username), {
-//             method: "GET",
-//             headers: {
-//                 "X-CSRF-Token": getMetaContent('csrf-token')
-//             }
-//         });
-
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-
-//         const data = await response.json();
-        
-//         if (data.valid) {
-//             console.log(data.message);  // username exists
-//             return true;
-//         } else {
-//             console.log(data.message);  // username does not exist
-//             return false;
-//         }
-//     } catch (error) {
-//         console.error("Error:", error);
-//         throw new Error(error);
-//     }
-// }
 
 function setPiece() {
     console.log("Setting piece!")
