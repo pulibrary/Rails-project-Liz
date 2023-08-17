@@ -23,7 +23,7 @@ console.log(`totalRounds = ${totalRounds}`);
 if (window.location.pathname.startsWith("/show_game")) {
     console.log("start of onload");
     setGame();
-    console.log("set game");
+    console.log("we've set game");
     createNextRoundButton();
     createNewGameButton();
     setTurn();
@@ -159,7 +159,7 @@ function checkWinner() {
      // horizontal
      for (let r = 0; r < rows; r++) {
          for (let c = 0; c < columns - 3; c++){ // 0 to 3 = 4 tiles
-            if (board[r][c] != ' ') { // TODO: needed check?
+            if (board[r][c] != ' ') { // if current tile does not have red or yellow, skip.
                 if (board[r][c] == board[r][c+1] && board[r][c+1] == board[r][c+2] && board[r][c+2] == board[r][c+3]) {
                     setWinner(r, c);
                     return;

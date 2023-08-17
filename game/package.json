@@ -2,5 +2,13 @@
   "dependencies": {
     "jquery": "^3.7.0",
     "jquery-ui-dist": "^1.13.2"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^9.3.1",
+    "@testing-library/jest-dom": "^6.0.0",
+    "jest": "^29.6.2"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }

@@ -38,7 +38,7 @@ RSpec.feature 'Score feature testing', type: :feature, js: true do
             expect(page).to have_text("turn to play!")
         end
 
-        # test playing the game and getting the correct buttons dynamically
+        # use jest for playing the game and getting the correct buttons dynamically
         # for next round and starting new game.
     end
 end
