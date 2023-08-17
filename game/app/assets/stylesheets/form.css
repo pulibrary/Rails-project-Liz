@@ -3,10 +3,12 @@
     display: flex;
     justify-content: center;
 }
-
-.form-back-button {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    right: 47px;
+.form-div {
+    width: 200px;
 }
+
+.form-back-button-div a {
+    padding: 2% 5%;
+} 
+
+

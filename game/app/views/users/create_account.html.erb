@@ -1,17 +1,5 @@
 <h1> Create User Account </h1>
 
-<% if flash[:alert] %>
-  <div class="flash-alert">
-    <span> <%= flash[:alert] %> </span>
-  </div>
-<% end %>
-
 <main> 
   <%= render "form", user: @user %>
-
-  <br> 
-
-  <div class="form-back-button">
-    <%= link_to "Back", "/", class: "decor-button button-shadow" %>
-  </div>
 </main>

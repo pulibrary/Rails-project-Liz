@@ -33,11 +33,12 @@ class UsersController < ApplicationController
   # Render the app/users/create_account.html.erb view.
   def create_account 
     @user = User.new
+    @back_route = root_path
     render "/users/create_account"
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params) 
 
     if @user.valid? && @user.save 
       flash[:notice] = "Created account successfully!"
@@ -58,6 +59,7 @@ class UsersController < ApplicationController
 
   def edit 
     @user = User.find(params[:id])
+    @back_route = access_profile_path(user_id: @user.id)
     flash[:alert] = nil
     render "/users/edit_profile"
   end
