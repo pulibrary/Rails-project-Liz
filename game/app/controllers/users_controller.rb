@@ -43,29 +43,28 @@ class UsersController < ApplicationController
       flash[:notice] = "Created account successfully!"
       redirect_to root_path
     else
-      flash["alert"] = "Unsuccessful account creation."
+      flash[:alert] = "Unsuccessful account creation."
       render :create_account, status: :unprocessable_entity
     end
   end
 
   def access_profile
     @user = User.find(params[:user_id])
-    @data = User.joins(:scores) # due to association, "joins" matches id automatically.
-                  .select("users.name, users.username, scores.score, scores.updated_at as date")
-                  .where("user_id = #{@user.id}")
-                  .order("scores.score DESC, date DESC")
+    @data = getProfileData
+    flash[:alert] = nil
 
-    render "/users/profile" # ->  has access to instance variables in controller
+    render "/users/profile" # ->  instance variables are passed down
   end
 
   def edit 
     @user = User.find(params[:id])
-    render "/users/edit_profile", user: @user
+    flash[:alert] = nil
+    render "/users/edit_profile"
   end
 
   def update
     @user = User.find(params[:id])
-
+    
     if @user.update(user_params)
       flash[:notice] = "Updated account information successfully!!"
       redirect_to "/users"
@@ -77,6 +76,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id]) 
+    @data = getProfileData
 
     if @user.destroy
       flash[:notice] = 'Deleted account successfully!'
@@ -85,6 +85,14 @@ class UsersController < ApplicationController
       flash[:alert] = 'Unsuccessful account deletion.'
       render :profile, status: :unprocessable_entity
     end
+  end
+
+  def getProfileData
+    data = User.joins(:scores) # due to association, "joins" matches id automatically.
+                  .select("users.name, users.username, scores.score, scores.updated_at as date")
+                  .where("user_id = #{@user.id}")
+                  .order("scores.score DESC, date DESC")
+    return data
   end
 
   private

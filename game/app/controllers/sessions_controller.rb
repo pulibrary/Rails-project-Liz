@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
             flash[:notice] = "Login successful!"
             redirect_to access_profile_path(user_id: @user.id)
         else
-            flash.now[:alert] = "Invalid username or password."
+            flash[:alert] = "Invalid username or password."
             render :new,  status: :unprocessable_entity
         end
     end

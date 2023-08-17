@@ -1,11 +1,10 @@
+<h1> Update Your Account Information</h1>
+
 <% if flash[:alert] %>
   <div class="flash-alert">
-    <%= flash[:alert] %>
+    <span> <%= flash[:alert] %> </span>
   </div>
 <% end %>
-
-<br>
-<h1> Update Your Account Information</h1>
 
 <main>
   <%= render "form", user: @user %>
