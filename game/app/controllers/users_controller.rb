@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params) 
+    @back_route = root_path
 
     if @user.valid? && @user.save 
       flash[:notice] = "Created account successfully!"
