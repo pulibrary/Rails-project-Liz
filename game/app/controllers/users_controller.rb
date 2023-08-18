@@ -67,6 +67,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @back_route = access_profile_path(user_id: @user.id)
     
     if @user.update(user_params)
       flash[:notice] = "Updated account information successfully!!"
