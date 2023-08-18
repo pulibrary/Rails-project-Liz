@@ -1,0 +1,66 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.0
+  node: circleci/node@2
+
+jobs:
+  build:
+        # first game is just the name circlei places the project, and the second game is MY game.
+    working_directory: ~/game/game
+    docker:
+      - image: cimg/ruby:3.2.2-browsers
+    steps:
+      - checkout:
+          path: ~/game
+      - ruby/install-deps
+      # Store bundle cache
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      #     cache-key: "yarn.lock"
+  test:
+    working_directory: ~/game/game
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:3.2.2-browsers
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: game_test
+          POSTGRES_PASSWORD: ""
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: circleci-demo-ruby
+      PGPASSWORD: ""
+      RAILS_ENV: test
+    steps:
+      - checkout:
+          path: ~/game
+      - ruby/install-deps
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      #     cache-key: "yarn.lock"
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database create
+          command: bin/rails db:create
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+
+      # Run rspec in parallel
+      - ruby/rspec-test
+      # - bundle exec rubocop
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
