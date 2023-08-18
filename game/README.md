@@ -1,24 +1,28 @@
-# README
+Welcome to Liz's Connect4 Game!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This website consists of 3 main pages:
+1- Home: welcomes all users and gives them access to play the Connect4 game.
+2- ScoreBoard: displays top 10 players of all time.
+3- Profile: displays scores from highest to lowest with their corresponding date-time for specific user.
 
-Things you may want to cover:
+I hope you have fun!
+
+
+Technical details about application:
 
 * Ruby version
+See gemfile 
 
-* System dependencies
-
-* Configuration
-
-* Database creation
+* Database 
+postgreSQL
 
 * Database initialization
+bundle exec rails db:seed
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
+bundle exec rspec [path of test file]
 
 * Deployment instructions
+Render 
 
 * ...
