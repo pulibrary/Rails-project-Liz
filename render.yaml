@@ -1,18 +1,18 @@
 databases:
-  - name: Liz Connect4
-    databaseName: mysite
-    user: mysite
+  - name: game
+    databaseName: game
+    user: game
 
 services:
   - type: web
-    name: mysite
+    name: game
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: game
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
