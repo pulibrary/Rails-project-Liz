@@ -7,19 +7,19 @@ orbs:
 jobs:
   build:
         # first game is just the name circlei places the project, and the second game is MY game.
-    working_directory: ~/game/game
+    working_directory: ~/game/Rails-project-Liz
     docker:
       - image: cimg/ruby:3.2.2-browsers
     steps:
       - checkout:
-          path: ~/game
+          path: ~/Rails-project-Liz
       - ruby/install-deps
       # Store bundle cache
       # - node/install-packages:
       #     pkg-manager: yarn
       #     cache-key: "yarn.lock"
   test:
-    working_directory: ~/game/game
+    working_directory: ~/game/Rails-project-Liz
     parallelism: 3
     docker:
       - image: cimg/ruby:3.2.2-browsers
@@ -37,7 +37,7 @@ jobs:
       RAILS_ENV: test
     steps:
       - checkout:
-          path: ~/game
+          path: ~/Rails-project-Liz
       - ruby/install-deps
       # - node/install-packages:
       #     pkg-manager: yarn
