@@ -1,28 +1,34 @@
-Welcome to Liz's Connect4 Game!
+**Welcome to Liz's Connect4 Game!**
 
-This website consists of 3 main pages:
-1- Home: welcomes all users and gives them access to play the Connect4 game.
-2- ScoreBoard: displays top 10 players of all time.
-3- Profile: displays scores from highest to lowest with their corresponding date-time for specific user.
+This website consists of 4 main pages:
+1. **Home**: welcomes all users, provides instructions to use website, and gives users access to play the Connect4 game. 
+2. **ScoreBoard**: displays top 10 players with most wins in a day, of all time!
+3. **Profile**: displays history of scores for logged-in user from highest to lowest (left to right), along with the date on which the score was achieved.
+   By logging into their profile, users can edit their account information and delete their account.
+5. **List of players**: displays information, such as name, username, and highest individual score (if any) for all users who have created an account.
 
-I hope you have fun!
+**I hope you have fun!**
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Technical details about application:
+**Technical details about application:**
 
-* Ruby version
-See gemfile 
+* Ruby version:
+"3.2.2"
 
-* Database 
+* Database: 
 postgreSQL
 
-* Database initialization
-bundle exec rails db:seed
+* To run application locally (in case free Render deployment expires):
+$ bin/rails s
 
-* How to run the test suite
-bundle exec rspec [path of test file]
+* How to run the test suite:
+$ bundle exec rspec [path of test file]
 
-* Deployment instructions
-Render 
+* Database initialization (to populate website):
+$ bundle exec rails db:seed
 
-* ...
+* Deployment instructions:
+Render
+  1. connect4-new branch will delete all data and populate records from scratch.
+  2. connect4 branch does not execute seed file, so database records should persist.
