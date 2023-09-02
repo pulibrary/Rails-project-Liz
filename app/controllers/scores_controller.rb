@@ -35,7 +35,7 @@ class ScoresController < ApplicationController
 
     def isRoundsValid(rounds)
         p "inside isRoundsValid"
-        if rounds != 0 && rounds.integer? && 1 <= rounds && rounds <= 10 && rounds.odd?
+        if rounds != 0 && rounds.integer? && 1 <= rounds && rounds <= 11 && rounds.odd?
             p "return true"
             return true
         else

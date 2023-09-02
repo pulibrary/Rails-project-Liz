@@ -14609,3 +14609,410 @@ Started GET "/assets/connect4-1a0b352c6d03271b3f40bbe56221ebfc92c96747c6753372fd
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mScore Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."user_id" = $1 AND "scores"."id" != $2 LIMIT $3[0m  [["user_id", 12], ["id", 4], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user4454"], ["LIMIT", 1]]
+  [1m[36mUser Create (6.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name214708520656068358205629205669967393084"], ["username", "user4454"], ["created_at", "2023-09-02 16:10:25.586109"], ["updated_at", "2023-09-02 16:10:25.586109"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:10:33 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 490.3ms | Allocations: 77299)
+  Rendered layout layouts/application.html.erb (Duration: 494.3ms | Allocations: 79700)
+Completed 200 OK in 520ms (Views: 510.4ms | ActiveRecord: 0.0ms | Allocations: 83519)
+Started GET "/assets/short-welcome-a8710b1419852b7816ef2e55e37e9c9ecffc830e2046579dbd13d52c5a8d9f3e.gif" for 127.0.0.1 at 2023-09-02 12:10:33 -0400
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/authenticate" for 127.0.0.1 at 2023-09-02 12:10:34 -0400
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 879)
+  Rendered layout layouts/application.html.erb (Duration: 2.9ms | Allocations: 1431)
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.0ms | Allocations: 2018)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/access_profile?user_id=13" for 127.0.0.1 at 2023-09-02 12:10:35 -0400
+Processing by UsersController#access_profile as HTML
+  Parameters: {"user_id"=>"13"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/profile.html.erb within layouts/application
+  [1m[36mUser Exists? (3.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "scores" ON "scores"."user_id" = "users"."id" WHERE (user_id = 13) LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered users/profile.html.erb within layouts/application (Duration: 17.8ms | Allocations: 3225)
+  Rendered layout layouts/application.html.erb (Duration: 18.4ms | Allocations: 3699)
+Completed 200 OK in 22ms (Views: 15.7ms | ActiveRecord: 5.1ms | Allocations: 4597)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/users/13/edit" for 127.0.0.1 at 2023-09-02 12:10:35 -0400
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit_profile.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 6.7ms | Allocations: 2305)
+  Rendered users/edit_profile.html.erb within layouts/application (Duration: 7.9ms | Allocations: 2547)
+  Rendered layout layouts/application.html.erb (Duration: 8.4ms | Allocations: 3020)
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 0.3ms | Allocations: 3571)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/create_account" for 127.0.0.1 at 2023-09-02 12:10:36 -0400
+Processing by UsersController#create_account as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/create_account.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 1.6ms | Allocations: 915)
+  Rendered users/create_account.html.erb within layouts/application (Duration: 3.2ms | Allocations: 1076)
+  Rendered layout layouts/application.html.erb (Duration: 4.1ms | Allocations: 1558)
+Completed 200 OK in 5ms (Views: 5.2ms | ActiveRecord: 0.0ms | Allocations: 1852)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/scoreboard" for 127.0.0.1 at 2023-09-02 12:10:36 -0400
+Processing by UsersController#scoreboard as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/scoreboard.html.erb within layouts/application
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT users.name, users.username, scores.score as highest_score, scores.updated_at as date FROM "users" INNER JOIN "scores" ON "scores"."user_id" = "users"."id" ORDER BY highest_score DESC, scores.updated_at DESC LIMIT $1[0m  [["LIMIT", 10]]
+  Rendered users/scoreboard.html.erb within layouts/application (Duration: 3.8ms | Allocations: 592)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | Allocations: 1073)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 1.6ms | Allocations: 1363)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/list_players" for 127.0.0.1 at 2023-09-02 12:10:37 -0400
+Processing by UsersController#list_players as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/list_players.html.erb within layouts/application
+  [1m[36mUser Load (6.4ms)[0m  [1m[34mSELECT users.name, users.username, subquery.highest_score as highest_score FROM "users" LEFT JOIN (
+  SELECT user_id, MAX(score) AS highest_score
+  FROM scores
+  GROUP BY user_id
+) AS subquery ON users.id = subquery.user_id ORDER BY users.name ASC[0m
+  Rendered users/list_players.html.erb within layouts/application (Duration: 8.7ms | Allocations: 534)
+  Rendered layout layouts/application.html.erb (Duration: 9.3ms | Allocations: 1015)
+Completed 200 OK in 10ms (Views: 3.5ms | ActiveRecord: 6.4ms | Allocations: 1305)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/setup_game" for 127.0.0.1 at 2023-09-02 12:10:37 -0400
+Processing by ScoresController#setup_game as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering scores/setup_game.html.erb within layouts/application
+  Rendered scores/setup_game.html.erb within layouts/application (Duration: 1.6ms | Allocations: 940)
+  Rendered layout layouts/application.html.erb (Duration: 2.4ms | Allocations: 1491)
+Completed 200 OK in 4ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 2067)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/show_game" for 127.0.0.1 at 2023-09-02 12:10:38 -0400
+Processing by ScoresController#show_game as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering scores/connect4.html.erb within layouts/application
+  Rendered scores/connect4.html.erb within layouts/application (Duration: 1.7ms | Allocations: 355)
+  Rendered layout layouts/application.html.erb (Duration: 2.1ms | Allocations: 828)
+Completed 200 OK in 3ms (Views: 3.0ms | ActiveRecord: 0.0ms | Allocations: 1075)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user8679"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name16398163617442968839433678225413682475"], ["username", "user8679"], ["created_at", "2023-09-02 16:10:57.960206"], ["updated_at", "2023-09-02 16:10:57.960206"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (11.4ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 14], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:11:01 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 65.3ms | Allocations: 24854)
+  Rendered layout layouts/application.html.erb (Duration: 70.9ms | Allocations: 27269)
+Completed 200 OK in 93ms (Views: 87.6ms | ActiveRecord: 0.0ms | Allocations: 31089)
+Started GET "/assets/short-welcome-a8710b1419852b7816ef2e55e37e9c9ecffc830e2046579dbd13d52c5a8d9f3e.gif" for 127.0.0.1 at 2023-09-02 12:11:01 -0400
+Started GET "/scoreboard" for 127.0.0.1 at 2023-09-02 12:11:01 -0400
+Processing by UsersController#scoreboard as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/scoreboard.html.erb within layouts/application
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT users.name, users.username, scores.score as highest_score, scores.updated_at as date FROM "users" INNER JOIN "scores" ON "scores"."user_id" = "users"."id" ORDER BY highest_score DESC, scores.updated_at DESC LIMIT $1[0m  [["LIMIT", 10]]
+  Rendered users/scoreboard.html.erb within layouts/application (Duration: 8.6ms | Allocations: 2002)
+  Rendered layout layouts/application.html.erb (Duration: 9.2ms | Allocations: 2484)
+Completed 200 OK in 10ms (Views: 8.9ms | ActiveRecord: 1.1ms | Allocations: 2830)
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:11:01 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 515)
+  Rendered layout layouts/application.html.erb (Duration: 1.2ms | Allocations: 993)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms | Allocations: 1180)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user429"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name160567095128081634141776483559023044599"], ["username", "user429"], ["created_at", "2023-09-02 16:11:02.233214"], ["updated_at", "2023-09-02 16:11:02.233214"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 15], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user1335"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name272504713802168563414763435897791053909"], ["username", "user1335"], ["created_at", "2023-09-02 16:11:02.239469"], ["updated_at", "2023-09-02 16:11:02.239469"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 16], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:11:02 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 515)
+  Rendered layout layouts/application.html.erb (Duration: 1.7ms | Allocations: 994)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 1194)
+Started GET "/setup_game" for 127.0.0.1 at 2023-09-02 12:11:02 -0400
+Processing by ScoresController#setup_game as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering scores/setup_game.html.erb within layouts/application
+  Rendered scores/setup_game.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1276)
+  Rendered layout layouts/application.html.erb (Duration: 4.7ms | Allocations: 1827)
+Completed 200 OK in 9ms (Views: 8.4ms | ActiveRecord: 0.0ms | Allocations: 2921)
+Started POST "/access_game" for 127.0.0.1 at 2023-09-02 12:11:02 -0400
+Processing by ScoresController#access_game as TURBO_STREAM
+  Parameters: {"rounds"=>"11", "username1"=>"user429", "username2"=>"user1335", "commit"=>"Submit"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user429"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user1335"], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering scores/setup_game.html.erb within layouts/application
+  Rendered scores/setup_game.html.erb within layouts/application (Duration: 0.9ms | Allocations: 479)
+  Rendered layout layouts/application.html.erb (Duration: 1.6ms | Allocations: 953)
+Completed 422 Unprocessable Entity in 5ms (Views: 2.1ms | ActiveRecord: 0.7ms | Allocations: 1723)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user622"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name274040344839105813096153880548791877089"], ["username", "user622"], ["created_at", "2023-09-02 16:12:51.934350"], ["updated_at", "2023-09-02 16:12:51.934350"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.7ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 17], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:12:54 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 65.9ms | Allocations: 24998)
+  Rendered layout layouts/application.html.erb (Duration: 68.8ms | Allocations: 27413)
+Completed 200 OK in 89ms (Views: 81.8ms | ActiveRecord: 0.0ms | Allocations: 31233)
+Started GET "/assets/short-welcome-a8710b1419852b7816ef2e55e37e9c9ecffc830e2046579dbd13d52c5a8d9f3e.gif" for 127.0.0.1 at 2023-09-02 12:12:55 -0400
+Started GET "/scoreboard" for 127.0.0.1 at 2023-09-02 12:12:55 -0400
+Processing by UsersController#scoreboard as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/scoreboard.html.erb within layouts/application
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT users.name, users.username, scores.score as highest_score, scores.updated_at as date FROM "users" INNER JOIN "scores" ON "scores"."user_id" = "users"."id" ORDER BY highest_score DESC, scores.updated_at DESC LIMIT $1[0m  [["LIMIT", 10]]
+  Rendered users/scoreboard.html.erb within layouts/application (Duration: 9.9ms | Allocations: 2002)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 2484)
+Completed 200 OK in 12ms (Views: 10.3ms | ActiveRecord: 1.1ms | Allocations: 2830)
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:12:55 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 515)
+  Rendered layout layouts/application.html.erb (Duration: 2.4ms | Allocations: 994)
+Completed 200 OK in 24ms (Views: 23.9ms | ActiveRecord: 0.0ms | Allocations: 1184)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user8790"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name93049762202726514800414481076967043760"], ["username", "user8790"], ["created_at", "2023-09-02 16:12:56.126095"], ["updated_at", "2023-09-02 16:12:56.126095"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 18], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user186"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name8379200689470057152525855487142099836"], ["username", "user186"], ["created_at", "2023-09-02 16:12:56.132189"], ["updated_at", "2023-09-02 16:12:56.132189"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 19], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:12:56 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 515)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | Allocations: 994)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 1194)
+Started GET "/setup_game" for 127.0.0.1 at 2023-09-02 12:12:56 -0400
+Processing by ScoresController#setup_game as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering scores/setup_game.html.erb within layouts/application
+  Rendered scores/setup_game.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1858)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | Allocations: 2456)
+Completed 200 OK in 13ms (Views: 12.6ms | ActiveRecord: 0.0ms | Allocations: 4162)
+Started POST "/access_game" for 127.0.0.1 at 2023-09-02 12:12:56 -0400
+Processing by ScoresController#access_game as TURBO_STREAM
+  Parameters: {"rounds"=>"9", "username1"=>"user8790", "username2"=>"user186", "commit"=>"Submit"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user8790"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user186"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:55231/show_game?rounds=9&usernameRedPlayer=user8790&usernameYellowPlayer=user186
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms | Allocations: 746)
+Started GET "/show_game?rounds=9&usernameRedPlayer=user8790&usernameYellowPlayer=user186" for 127.0.0.1 at 2023-09-02 12:12:56 -0400
+Processing by ScoresController#show_game as TURBO_STREAM
+  Parameters: {"rounds"=>"9", "usernameRedPlayer"=>"user8790", "usernameYellowPlayer"=>"user186"}
+  Rendering layout layouts/application.html.erb
+  Rendering scores/connect4.html.erb within layouts/application
+  Rendered scores/connect4.html.erb within layouts/application (Duration: 0.7ms | Allocations: 350)
+  Rendered layout layouts/application.html.erb (Duration: 1.2ms | Allocations: 823)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 1121)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user3660"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name39732046118957342034377125072795583542"], ["username", "user3660"], ["created_at", "2023-09-02 16:13:22.970079"], ["updated_at", "2023-09-02 16:13:22.970079"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.6ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 20], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:13:25 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 68.1ms | Allocations: 24710)
+  Rendered layout layouts/application.html.erb (Duration: 71.3ms | Allocations: 27125)
+Completed 200 OK in 88ms (Views: 82.4ms | ActiveRecord: 0.0ms | Allocations: 30945)
+Started GET "/assets/short-welcome-a8710b1419852b7816ef2e55e37e9c9ecffc830e2046579dbd13d52c5a8d9f3e.gif" for 127.0.0.1 at 2023-09-02 12:13:26 -0400
+Started GET "/scoreboard" for 127.0.0.1 at 2023-09-02 12:13:26 -0400
+Processing by UsersController#scoreboard as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/scoreboard.html.erb within layouts/application
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT users.name, users.username, scores.score as highest_score, scores.updated_at as date FROM "users" INNER JOIN "scores" ON "scores"."user_id" = "users"."id" ORDER BY highest_score DESC, scores.updated_at DESC LIMIT $1[0m  [["LIMIT", 10]]
+  Rendered users/scoreboard.html.erb within layouts/application (Duration: 9.1ms | Allocations: 2002)
+  Rendered layout layouts/application.html.erb (Duration: 9.7ms | Allocations: 2484)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 1.0ms | Allocations: 2830)
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:13:26 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 515)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | Allocations: 994)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 1184)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user4410"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name124723543093456331136786132742998757779"], ["username", "user4410"], ["created_at", "2023-09-02 16:13:27.110542"], ["updated_at", "2023-09-02 16:13:27.110542"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 21], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user717"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name331166884884172258602049853283072202818"], ["username", "user717"], ["created_at", "2023-09-02 16:13:27.115005"], ["updated_at", "2023-09-02 16:13:27.115005"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 22], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:13:27 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 515)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | Allocations: 993)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 1188)
+Started GET "/setup_game" for 127.0.0.1 at 2023-09-02 12:13:27 -0400
+Processing by ScoresController#setup_game as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering scores/setup_game.html.erb within layouts/application
+  Rendered scores/setup_game.html.erb within layouts/application (Duration: 6.7ms | Allocations: 1858)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | Allocations: 2409)
+Completed 200 OK in 11ms (Views: 10.7ms | ActiveRecord: 0.0ms | Allocations: 3144)
+Started POST "/access_game" for 127.0.0.1 at 2023-09-02 12:13:27 -0400
+Processing by ScoresController#access_game as TURBO_STREAM
+  Parameters: {"rounds"=>"7", "username1"=>"user4410", "username2"=>"user717", "commit"=>"Submit"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user4410"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user717"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:55291/show_game?rounds=7&usernameRedPlayer=user4410&usernameYellowPlayer=user717
+Completed 302 Found in 3ms (ActiveRecord: 0.7ms | Allocations: 748)
+Started GET "/show_game?rounds=7&usernameRedPlayer=user4410&usernameYellowPlayer=user717" for 127.0.0.1 at 2023-09-02 12:13:27 -0400
+Processing by ScoresController#show_game as TURBO_STREAM
+  Parameters: {"rounds"=>"7", "usernameRedPlayer"=>"user4410", "usernameYellowPlayer"=>"user717"}
+  Rendering layout layouts/application.html.erb
+  Rendering scores/connect4.html.erb within layouts/application
+  Rendered scores/connect4.html.erb within layouts/application (Duration: 0.6ms | Allocations: 350)
+  Rendered layout layouts/application.html.erb (Duration: 1.1ms | Allocations: 824)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms | Allocations: 1123)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user1208"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name141388513139393147572968308064260492956"], ["username", "user1208"], ["created_at", "2023-09-02 16:13:42.839672"], ["updated_at", "2023-09-02 16:13:42.839672"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.6ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 23], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:13:45 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 100.5ms | Allocations: 24480)
+  Rendered layout layouts/application.html.erb (Duration: 104.7ms | Allocations: 26898)
+Completed 200 OK in 125ms (Views: 119.9ms | ActiveRecord: 0.0ms | Allocations: 30717)
+Started GET "/assets/short-welcome-a8710b1419852b7816ef2e55e37e9c9ecffc830e2046579dbd13d52c5a8d9f3e.gif" for 127.0.0.1 at 2023-09-02 12:13:46 -0400
+Started GET "/scoreboard" for 127.0.0.1 at 2023-09-02 12:13:46 -0400
+Processing by UsersController#scoreboard as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/scoreboard.html.erb within layouts/application
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT users.name, users.username, scores.score as highest_score, scores.updated_at as date FROM "users" INNER JOIN "scores" ON "scores"."user_id" = "users"."id" ORDER BY highest_score DESC, scores.updated_at DESC LIMIT $1[0m  [["LIMIT", 10]]
+  Rendered users/scoreboard.html.erb within layouts/application (Duration: 7.5ms | Allocations: 2002)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | Allocations: 2484)
+Completed 200 OK in 10ms (Views: 7.8ms | ActiveRecord: 1.5ms | Allocations: 2830)
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:13:46 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 515)
+  Rendered layout layouts/application.html.erb (Duration: 2.0ms | Allocations: 994)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 1184)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user1169"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name140453640039458583565347910378870619789"], ["username", "user1169"], ["created_at", "2023-09-02 16:13:46.861239"], ["updated_at", "2023-09-02 16:13:46.861239"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 24], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user4086"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "name154818111894652331179521678098230969448"], ["username", "user4086"], ["created_at", "2023-09-02 16:13:46.871389"], ["updated_at", "2023-09-02 16:13:46.871389"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("score", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["score", 86400], ["user_id", 25], ["created_at", "2023-09-02"], ["updated_at", "2023-09-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2023-09-02 12:13:46 -0400
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 516)
+  Rendered layout layouts/application.html.erb (Duration: 7.2ms | Allocations: 994)
+Completed 200 OK in 10ms (Views: 7.5ms | ActiveRecord: 0.0ms | Allocations: 1189)
+Started GET "/setup_game" for 127.0.0.1 at 2023-09-02 12:13:47 -0400
+Processing by ScoresController#setup_game as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering scores/setup_game.html.erb within layouts/application
+  Rendered scores/setup_game.html.erb within layouts/application (Duration: 5.2ms | Allocations: 1938)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | Allocations: 2489)
+Completed 200 OK in 10ms (Views: 9.7ms | ActiveRecord: 0.0ms | Allocations: 3068)
+Started POST "/access_game" for 127.0.0.1 at 2023-09-02 12:13:47 -0400
+Processing by ScoresController#access_game as TURBO_STREAM
+  Parameters: {"rounds"=>"11", "username1"=>"user1169", "username2"=>"user4086", "commit"=>"Submit"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user1169"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "user4086"], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering scores/setup_game.html.erb within layouts/application
+  Rendered scores/setup_game.html.erb within layouts/application (Duration: 0.5ms | Allocations: 479)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 952)
+Completed 422 Unprocessable Entity in 4ms (Views: 1.2ms | ActiveRecord: 0.5ms | Allocations: 1719)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m

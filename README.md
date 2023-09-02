@@ -28,7 +28,6 @@ $ bundle exec rspec [path of test file]
 * Database initialization (to populate website):
 $ bundle exec rails db:seed
 
-* Deployment instructions:
+* Deployment:
 Render
-  1. connect4-new branch will delete all data and populate records from scratch.
-  2. connect4 branch does not execute seed file, so database records should persist.
+  1. In bin/render-build.sh, uncomment "bundle exec rails db:seed" to populate database from scratch.

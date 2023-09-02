@@ -27,6 +27,9 @@ RSpec.feature 'Score feature testing', type: :feature, js: true do
             fill_in :rounds, with: (rand(1..6) * 2) - 1
             fill_in :username1, with: bot1.user.username
             fill_in :username2, with: bot2.user.username
+            p (rand(1..6) * 2) - 1
+            p bot1.user.username
+            p bot2.user.username
             click_button "Submit"
 
             expect(page).to have_text("Connect4")

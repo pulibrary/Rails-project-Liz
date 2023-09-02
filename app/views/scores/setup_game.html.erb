@@ -4,7 +4,7 @@
     <div class="form-content">
         <%= form_with url: access_game_path do |form| %>
             <div>
-                <%= form.label :rounds, "Rounds (odd integer between 1 and 11)" %><br>
+                <%= form.label :rounds, "Rounds (odd integer between 1 and 11, inclusive)" %><br>
                 <%= form.text_field :rounds, required: true %>
                 <% if @isRoundsValid == false %>
                     <div> <p class="invalid-input"> Invalid number of rounds <p> </div>
